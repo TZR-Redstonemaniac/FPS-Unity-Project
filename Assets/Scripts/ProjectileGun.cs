@@ -38,6 +38,8 @@ public class ProjectileGun : MonoBehaviour
     
     //bug fixing :D
     public bool allowInvoke = true;
+    
+    public RaycastHit hit;
 
     public void ReloadInput(InputAction.CallbackContext context)
     {
@@ -89,7 +91,6 @@ public class ProjectileGun : MonoBehaviour
 
         //Find the exact hit position using a raycast
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
-        RaycastHit hit;
 
         //check if ray hits something
         Vector3 targetPoint;

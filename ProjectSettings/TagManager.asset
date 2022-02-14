@@ -12,11 +12,12 @@ TagManager:
   - Sand
   - Flesh
   - Stone
+  - ProjectileGunObject
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Heal
+  - Wall Run
   - Water
   - UI
   - Ground

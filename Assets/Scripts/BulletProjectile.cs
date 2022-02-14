@@ -14,22 +14,25 @@ public class BulletProjectile : MonoBehaviour
 
     private Camera cam;
     private GameObject cameraHolder;
-    private RaycastHit hit;
+    private GameObject projectileholder;
+    private ProjectileGun projectile;
+    private RaycastHit pointHit;
     private Vector3 ImpactLocation;
 
     private void Awake()
     {
-        cameraHolder = GameObject.FindWithTag("Camera");
-        cam = cameraHolder.GetComponent<Camera>();
+        cameraHolder = GameObject.FindWithTag("MainCamera");
+        cam = cameraHolder.GetComponent<Camera>(); 
         
-        if (cam != null) Debug.Log("False");
+        projectileholder = GameObject.FindWithTag("ProjectileGunObject");
+        projectile = projectileholder.GetComponent<ProjectileGun>();
+
+        pointHit = projectile.hit;
     }
 
     private void Update()
     {
-        Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity);
-
-        ImpactLocation = hit.point;
+        ImpactLocation = pointHit.point;
     }
 
     private void OnTriggerEnter(Collider other)

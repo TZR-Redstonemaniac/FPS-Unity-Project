@@ -23,9 +23,11 @@ public class PlayerMovement : MonoBehaviour {
     public float maxSpeed = 20;
     public bool grounded;
     public LayerMask whatIsGround;
+    public bool move;
     
     public float counterMovement = 0.175f;
     private float threshold = 0.01f;
+    private float moveMult = 0.5f;
     public float maxSlopeAngle = 35f;
     public bool useGravity;
 
@@ -151,8 +153,18 @@ public class PlayerMovement : MonoBehaviour {
         if (grounded && crouching) multiplierV = 0f;
 
         //Apply forces to move player
-        rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
-        rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+        if (move)
+        {
+            moveMult = 0.5f;
+        }
+        else
+        {
+            moveMult = 1f;
+        }
+
+        rb.AddForce(
+            orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV * moveMult);
+        rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier * moveMult);
     }
 
     private void Jump() {

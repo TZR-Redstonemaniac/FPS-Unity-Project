@@ -12,7 +12,7 @@ public class GrapplingGun : MonoBehaviour
     private bool grapplePressed;
     private bool grappleActivated;
     private SpringJoint joint;
-    
+
     public LayerMask canBeGrappled;
     public Transform gunTip, mainCamera, player;
     public GameObject claw;
@@ -20,6 +20,7 @@ public class GrapplingGun : MonoBehaviour
     public PlayerInput playerInput;
     public bool grappleConnected;
     public ParticleSystem muzzleFlash;
+    public PlayerMovement playerMovement;
 
     void Awake()
     {
@@ -74,6 +75,8 @@ public class GrapplingGun : MonoBehaviour
             joint.connectedBody = hit.rigidbody;
 
             lr.positionCount = 2;
+            
+            playerMovement.move = false;
         }
     }
 
@@ -92,6 +95,9 @@ public class GrapplingGun : MonoBehaviour
         grappleConnected = false;
 
         lr.positionCount = 0;
+
+        playerMovement.move = true;
+        
         Destroy(joint);
     }
     
