@@ -74,11 +74,13 @@
      <Compile Include="Assets\Movement\ISurfControllable.cs" />
      <Compile Include="Assets\Scripts\ProjectileGun.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\MyWallRun.cs" />
      <Compile Include="Assets\Scripts\MyPlayerMovement.cs" />
      <Compile Include="Assets\Scripts\KeepPortalAppeared.cs" />
      <Compile Include="Assets\Scripts\WallRun.cs" />
      <Compile Include="Assets\Scripts\Rebinding.cs" />
      <Compile Include="Assets\Dani\PlayerMovement.cs" />
+     <Compile Include="Assets\Titanfall Test\PlayerMovementTF2.cs" />
      <Compile Include="Assets\Movement\MovementConfig.cs" />
      <Compile Include="Assets\Scripts\Rifle.cs" />
      <Compile Include="Assets\Scripts\BulletProjectile.cs" />
@@ -86,6 +88,7 @@
      <Compile Include="Assets\Scripts\SelectionManager.cs" />
      <Compile Include="Assets\Scripts\WeaponSway.cs" />
      <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
+     <Compile Include="Assets\CustomTag.cs" />
      <Compile Include="Assets\Extensions\IntExtensions.cs" />
      <Compile Include="Assets\Scripts\RotateGun.cs" />
      <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
@@ -96,6 +99,7 @@
      <Compile Include="Assets\Dani\MoveCamera.cs" />
      <Compile Include="Assets\Scripts\Ladder.cs" />
      <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
+     <Compile Include="Assets\Titanfall Test\CameraController.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\AnimationPlayer.cs" />
      <Compile Include="Assets\Scripts\PickupCollectible.cs" />
@@ -106,8 +110,6 @@
      <Compile Include="Assets\Scripts\PlayerLook.cs" />
      <Compile Include="Assets\Scripts\GrapplingGun2.cs" />
      <Compile Include="Assets\Scripts\CameraWaterCheck.cs" />
-     <Compile Include="Assets\MyWallRun.cs" />
-     <Compile Include="Assets\CustomTag.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

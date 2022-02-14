@@ -89,7 +89,7 @@ public class MyPlayerMovement : MonoBehaviour
 
     private RaycastHit slopeHit;
 
-    [SerializeField] WallRun wallRun;
+    [SerializeField] MyWallRun wallRun;
     private Vector3 _rbVelocity;
 
     private bool loweredHeight;
@@ -213,7 +213,7 @@ public class MyPlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
-        else if (doubleJumpAmount >= 1 && !wallRun.isWallRun && context.started)
+        else if (doubleJumpAmount >= 1 && context.started)
         {
             doubleJumpAmount--;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
         [Header("Refrences")]
-        [SerializeField] WallRun wallRun;
+        [SerializeField] MyWallRun wallRun;
         
         [SerializeField] private float sensX;
         [SerializeField] private float sensY;

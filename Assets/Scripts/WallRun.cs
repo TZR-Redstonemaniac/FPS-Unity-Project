@@ -4,126 +4,101 @@ using UnityEngine;
 
 public class WallRun : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private Transform orientation;
+    [Header("Wall Running")]
+    [SerializeField] private float _wallRunUpForce;
+    [SerializeField] private float _wallRunPushForce;
+    //<<Summary>> Boolean that is used for adding forces when jumping off the walls, used to determine which direction.
+    private bool isRightWall;
+    private bool isLeftWall;
 
-    [Header("Detection")] 
-    [SerializeField] private float wallDistance = .5f;
-    [SerializeField] private float minimumJumpHeight = 1.5f;
+    //Used for effects etc.
+    public static bool isWallRunning;
+    //<<Summary>> Checks the distance from walls and takes the wall that is the closest to the player
+    private float distanceFromLeftWall;
+    private float distanceFromRightWall;
 
-    [Header("Wall Running")] 
-    [SerializeField] private float wallRunGravity = 1f;
-    [SerializeField] private float wallRunJumpForce = 6f;
-
-    [Header("Camera")] 
-    [SerializeField] private Camera cam;
-    [SerializeField] private float fov;
-    [SerializeField] private float wallRunFov;
-    [SerializeField] private float wallRunFovTime;
-    [SerializeField] private float camTilt;
-    [SerializeField] private float camTiltTime;
-    
-    public float tilt { get; private set;  }
-
-    private bool wallLeft = false;
-    private bool wallRight = false;
-    
-    public bool isWallRun = false;
-
-    public PlayerMovement playerMove;
-
-    private RaycastHit leftWallHit;
-    private RaycastHit rightWallHit;
-
+    //Used to add forces.
     private Rigidbody rb;
-
-    private void Start()
+    public Transform cam;
+    public Transform head;
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        wallRunFov = fov + 20;
     }
-
-    bool canWallRun()
+    private void wallChecker()
     {
-        return !Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight);
-    }
+        RaycastHit rightRaycast;
+        RaycastHit leftRaycast;
 
-    void CheckWall()
-    {
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance);
-        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallDistance);
+        if (Physics.Raycast(head.transform.position, head.transform.right, out rightRaycast))
+        {
+            distanceFromRightWall = Vector3.Distance(head.transform.position, rightRaycast.point);
+            if (distanceFromRightWall <= 3f)
+            {
+                isRightWall = true;
+                isLeftWall = false;
+            }
+        }
+        if (Physics.Raycast(head.transform.position, -head.transform.right, out leftRaycast))
+        {
+            distanceFromLeftWall = Vector3.Distance(head.transform.position, leftRaycast.point);
+            if (distanceFromLeftWall <= 3f)
+            {
+                isRightWall = false;
+                isLeftWall = true;
+            }
+        }
+
     }
 
     private void Update()
     {
-        CheckWall();
-
-        if (canWallRun())
-        {
-            if (wallLeft)
-            {
-                StartWallRun();
-            }
-            else if (wallRight)
-            {
-                StartWallRun();
-            }
-            else
-            {
-                StopWallRun();
-            }
-        }
-        else
-        {
-            StopWallRun();
-        }
+        wallChecker();
     }
 
-    void StartWallRun()
+
+
+    private void OnCollisionEnter(Collision collision)
     {
-        isWallRun = true;
-        
-        rb.useGravity = false;
-        playerMove.useGravity = false;
-
-        rb.drag = 2;
-        
-        rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
-
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, wallRunFovTime * Time.deltaTime);
-
-        if (wallLeft)
-            tilt = Mathf.Lerp(tilt, -camTilt, camTiltTime * Time.deltaTime);
-        else if (wallRight)
-            tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (collision.transform.CompareTag("RunnableWall"))
         {
-            if (wallLeft)
+            isWallRunning = true;
+            rb.useGravity = false;
+
+            if (isLeftWall)
             {
-                Vector3 wallRunJumpDirection = transform.up + leftWallHit.normal;
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+                cam.transform.localEulerAngles = new Vector3(0f, 0f, -10f);
             }
-            else if (wallRight)
+            if (isRightWall)
             {
-                Vector3 wallRunJumpDirection = transform.up + rightWallHit.normal;
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+                cam.transform.localEulerAngles = new Vector3(0f, 0f, 10f);
             }
         }
     }
-
-    void StopWallRun()
+    private void OnCollisionStay(Collision collision)
     {
-        isWallRun = false;
-        
-        rb.drag = 0;
-        
-        rb.useGravity = true;
-        playerMove.useGravity = true;
-        
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, wallRunFovTime * Time.deltaTime);
-        tilt = Mathf.Lerp(tilt, -0, camTiltTime * Time.deltaTime);
+        if (collision.transform.CompareTag("RunnableWall"))
+        {
+            if (Input.GetKey(KeyCode.Space) && isLeftWall)
+            {
+                rb.AddForce(Vector3.up * _wallRunUpForce, ForceMode.Impulse);
+                rb.AddForce(head.transform.right * _wallRunUpForce, ForceMode.Impulse);
+            }
+            if (Input.GetKey(KeyCode.Space) && isRightWall)
+            {
+                rb.AddForce(Vector3.up * _wallRunUpForce, ForceMode.Impulse);
+                rb.AddForce(-head.transform.right * _wallRunUpForce, ForceMode.Impulse);
+            }
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+
+        if (collision.transform.CompareTag("RunnableWall"))
+        {
+            cam.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+            isWallRunning = false;
+            rb.useGravity = true;
+        }
     }
 }

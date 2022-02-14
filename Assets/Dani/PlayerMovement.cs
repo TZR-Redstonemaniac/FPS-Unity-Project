@@ -11,12 +11,13 @@ public class PlayerMovement : MonoBehaviour {
     
     //Other
     private Rigidbody rb;
-    public WallRun WallRun;
+    public MyWallRun WallRun;
 
     //Rotation and look
     private float xRotation;
     private float sensitivity = 50f;
     public float sensMultiplier = 1f;
+    public Transform head;
     
     //Movement
     public float moveSpeed = 4500;
@@ -52,6 +53,12 @@ public class PlayerMovement : MonoBehaviour {
     //Sliding
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
+    
+    private float distanceFromLeftWall;
+    private float distanceFromRightWall;
+    
+    private bool isRightWall;
+    private bool isLeftWall;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -305,5 +312,32 @@ public class PlayerMovement : MonoBehaviour {
     private void StopGrounded() {
         grounded = false;
     }
-    
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.tag == "RunnableWall")
+        {
+            RaycastHit rightRaycast;
+            RaycastHit leftRaycast;
+
+            if (Physics.Raycast(head.transform.position, head.transform.right, out rightRaycast))
+            {
+                distanceFromRightWall = Vector3.Distance(head.transform.position, rightRaycast.point);
+                if (distanceFromRightWall <= 3f)
+                {
+                    isRightWall = true;
+                    isLeftWall = false;
+                }
+            }
+            if (Physics.Raycast(head.transform.position, -head.transform.right, out leftRaycast))
+            {
+                distanceFromLeftWall = Vector3.Distance(head.transform.position, leftRaycast.point);
+                if (distanceFromLeftWall <= 3f)
+                {
+                    isRightWall = false;
+                    isLeftWall = true;
+                }
+            }
+        }
+    }
 }

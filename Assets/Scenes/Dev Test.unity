@@ -1246,6 +1246,7 @@ GameObject:
   - component: {fileID: 685853997}
   - component: {fileID: 685853996}
   - component: {fileID: 685853995}
+  - component: {fileID: 685854000}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1284,7 +1285,7 @@ MonoBehaviour:
   playerCam: {fileID: 711285025}
   orientation: {fileID: 1147021276}
   WallRun: {fileID: 0}
-  sensMultiplier: 5
+  sensMultiplier: 1.5
   moveSpeed: 4500
   maxSpeed: 20
   grounded: 0
@@ -1377,6 +1378,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685853993}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &685854000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685853993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f124f98fa959f3d41b7b386fd202626b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wallRunUpForce: 20
+  _wallRunPushForce: 20
+  cam: {fileID: 711285025}
+  head: {fileID: 1196957984}
 --- !u!1 &711285023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,7 +2669,7 @@ GameObject:
   - component: {fileID: 1423115049}
   m_Layer: 6
   m_Name: Wall
-  m_TagString: CanWallrun
+  m_TagString: RunnableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2747,7 +2764,7 @@ GameObject:
   - component: {fileID: 1434979733}
   m_Layer: 6
   m_Name: Wall (1)
-  m_TagString: CanWallrun
+  m_TagString: RunnableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

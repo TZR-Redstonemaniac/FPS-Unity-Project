@@ -6,13 +6,13 @@ TagManager:
   tags:
   - Double Jump
   - Button
-  - CanWallrun
   - Wood
   - Metal
   - Sand
   - Flesh
   - Stone
   - ProjectileGunObject
+  - RunnableWall
   layers:
   - Default
   - TransparentFX
