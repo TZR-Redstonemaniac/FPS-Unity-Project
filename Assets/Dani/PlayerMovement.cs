@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    //Assingables
+    //Assignable
     public Transform playerCam;
     public Transform orientation;
     
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool useGravity;
 
     //Crouch & Slide
-    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    private readonly Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     private Vector3 playerScale;
     public float slideForce = 400;
     public float slideCounterMovement = 0.2f;
@@ -52,13 +52,6 @@ public class PlayerMovement : MonoBehaviour {
     
     //Sliding
     private Vector3 normalVector = Vector3.up;
-    private Vector3 wallNormalVector;
-    
-    private float distanceFromLeftWall;
-    private float distanceFromRightWall;
-    
-    private bool isRightWall;
-    private bool isLeftWall;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -133,7 +126,7 @@ public class PlayerMovement : MonoBehaviour {
         if (readyToJump && jumping) Jump();
 
         //Set max speed
-        float maxSpeed = this.maxSpeed;
+        float speed = this.maxSpeed;
         
         //If sliding down a ramp, add force down so player stays grounded and also builds speed
         if (crouching && grounded && readyToJump) {
@@ -141,11 +134,11 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
         
-        //If speed is larger than maxspeed, cancel out the input so you don't go over max speed
-        if (x > 0 && xMag > maxSpeed) x = 0;
-        if (x < 0 && xMag < -maxSpeed) x = 0;
-        if (y > 0 && yMag > maxSpeed) y = 0;
-        if (y < 0 && yMag < -maxSpeed) y = 0;
+        //If speed is larger than maximum speed, cancel out the input so you don't go over max speed
+        if (x > 0 && xMag > speed) x = 0;
+        if (x < 0 && xMag < -speed) x = 0;
+        if (y > 0 && yMag > speed) y = 0;
+        if (y < 0 && yMag < -speed) y = 0;
 
         //Some multipliers
         float multiplier = 1f, multiplierV = 1f;
@@ -230,7 +223,7 @@ public class PlayerMovement : MonoBehaviour {
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
 
-    private void CounterMovement(float x, float y, Vector2 mag) {
+    private void CounterMovement(float CounterX, float CounterY, Vector2 mag) {
         if (!grounded || jumping) return;
 
         //Slow down sliding
@@ -240,10 +233,10 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Counter movement
-        if (Math.Abs(mag.x) > threshold && Math.Abs(x) < 0.05f || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0)) {
+        if (Math.Abs(mag.x) > threshold && Math.Abs(CounterX) < 0.05f || (mag.x < -threshold && CounterX > 0) || (mag.x > threshold && CounterX < 0)) {
             rb.AddForce(moveSpeed * orientation.transform.right * Time.deltaTime * -mag.x * counterMovement);
         }
-        if (Math.Abs(mag.y) > threshold && Math.Abs(y) < 0.05f || (mag.y < -threshold && y > 0) || (mag.y > threshold && y < 0)) {
+        if (Math.Abs(mag.y) > threshold && Math.Abs(CounterY) < 0.05f || (mag.y < -threshold && CounterY > 0) || (mag.y > threshold && CounterY < 0)) {
             rb.AddForce(moveSpeed * orientation.transform.forward * Time.deltaTime * -mag.y * counterMovement);
         }
         
@@ -260,7 +253,7 @@ public class PlayerMovement : MonoBehaviour {
     /// Useful for vectors calculations regarding movement and limiting movement
     /// </summary>
     /// <returns></returns>
-    public Vector2 FindVelRelativeToLook() {
+    private Vector2 FindVelRelativeToLook() {
         float lookAngle = orientation.transform.eulerAngles.y;
         float moveAngle = Mathf.Atan2(rb.velocity.x, rb.velocity.z) * Mathf.Rad2Deg;
 
@@ -311,33 +304,5 @@ public class PlayerMovement : MonoBehaviour {
 
     private void StopGrounded() {
         grounded = false;
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.collider.tag == "RunnableWall")
-        {
-            RaycastHit rightRaycast;
-            RaycastHit leftRaycast;
-
-            if (Physics.Raycast(head.transform.position, head.transform.right, out rightRaycast))
-            {
-                distanceFromRightWall = Vector3.Distance(head.transform.position, rightRaycast.point);
-                if (distanceFromRightWall <= 3f)
-                {
-                    isRightWall = true;
-                    isLeftWall = false;
-                }
-            }
-            if (Physics.Raycast(head.transform.position, -head.transform.right, out leftRaycast))
-            {
-                distanceFromLeftWall = Vector3.Distance(head.transform.position, leftRaycast.point);
-                if (distanceFromLeftWall <= 3f)
-                {
-                    isRightWall = false;
-                    isLeftWall = true;
-                }
-            }
-        }
     }
 }
