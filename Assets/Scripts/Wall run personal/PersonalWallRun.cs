@@ -20,10 +20,13 @@ public class PersonalWallRun : MonoBehaviour
 
     public PlayerMovement playerMovement;
 
+    public Transform wallRunTransform;
+    
     private bool wallLeft;
     private bool wallRight;
 
     private Collider wallMesh = null;
+
     
     private void Update()
     {
@@ -57,7 +60,10 @@ public class PersonalWallRun : MonoBehaviour
 
             wallMesh = leftHit.collider;
             wallMesh.material = wallRunPhysicsMaterial;
-            
+
+            wallRunTransform.right = leftHit.normal;
+            wallRunTransform.right = -wallRunTransform.right;
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
