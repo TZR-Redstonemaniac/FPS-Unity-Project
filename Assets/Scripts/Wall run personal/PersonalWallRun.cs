@@ -13,11 +13,17 @@ public class PersonalWallRun : MonoBehaviour
     public float wallDistance;
     public float wallRunGravity;
     public float wallRunPush;
+    public float wallRunJumpForce;
+
+    public PhysicMaterial wallRunPhysicsMaterial;
+    public PhysicMaterial groundPhysicsMaterial;
 
     public PlayerMovement playerMovement;
 
     private bool wallLeft;
     private bool wallRight;
+
+    private Collider wallMesh = null;
     
     private void Update()
     {
@@ -30,18 +36,43 @@ public class PersonalWallRun : MonoBehaviour
         if (wallRight && !playerMovement.grounded)
         {
             rb.useGravity = false;
-            rb.AddForce(Vector3.right * wallRunPush * Time.deltaTime, ForceMode.Force);
-            rb.AddForce(Vector3.down * wallRunGravity * Time.deltaTime);
+            rb.AddForce(orientation.right * wallRunPush * Time.deltaTime, ForceMode.Force);
+            rb.AddForce(-orientation.up * wallRunGravity * Time.deltaTime, ForceMode.Acceleration);
+
+            wallMesh = rightHit.collider;
+            wallMesh.material = wallRunPhysicsMaterial;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
+                rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
+                rb.AddForce(-orientation.right * wallRunJumpForce, ForceMode.Impulse);
+            }
         }
         else if (wallLeft && !playerMovement.grounded)
         {
             rb.useGravity = false;
-            rb.AddForce(Vector3.left * wallRunPush * Time.deltaTime, ForceMode.Force);
-            rb.AddForce(Vector3.down * wallRunGravity * Time.deltaTime);
+            rb.AddForce(-orientation.right * wallRunPush * Time.deltaTime, ForceMode.Force);
+            rb.AddForce(-orientation.up * wallRunGravity * Time.deltaTime, ForceMode.Acceleration);
+
+            wallMesh = leftHit.collider;
+            wallMesh.material = wallRunPhysicsMaterial;
+            
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
+                rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
+                rb.AddForce(orientation.right * wallRunJumpForce, ForceMode.Impulse);
+            }
         }
         else
         {
             rb.useGravity = true;
+
+            if (wallMesh != null)
+            {
+                wallMesh.material = groundPhysicsMaterial;
+            }
         }
     }
 }
