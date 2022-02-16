@@ -2,14 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GrapplingGun : MonoBehaviour
 {
     
     private LineRenderer lr;
     private Vector3 grapplePoint;
-    private bool grapplePressed;
     private bool grappleActivated;
     private SpringJoint joint;
 
@@ -17,7 +15,6 @@ public class GrapplingGun : MonoBehaviour
     public Transform gunTip, mainCamera, player;
     public GameObject claw;
     public float maxDistance = 100f;
-    public PlayerInput playerInput;
     public bool grappleConnected;
     public ParticleSystem muzzleFlash;
     public PlayerMovement playerMovement;
@@ -29,10 +26,10 @@ public class GrapplingGun : MonoBehaviour
 
     private void Update()
     {
-        if (grapplePressed && !grappleActivated)
+        if (Input.GetButtonDown("Fire1") && !grappleActivated)
         {
             StartGrapple();
-        } else if (!grapplePressed)
+        } else if (Input.GetButtonUp("Fire1"))
         {
             StopGrapple();
         }
@@ -99,19 +96,6 @@ public class GrapplingGun : MonoBehaviour
         playerMovement.move = true;
         
         Destroy(joint);
-    }
-    
-    public void Grapple(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            grapplePressed = true;
-        }
-
-        if (context.canceled)
-        {
-            grapplePressed = false;
-        }
     }
 
     public bool IsGrappling()

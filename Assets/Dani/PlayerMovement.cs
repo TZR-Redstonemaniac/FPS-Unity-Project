@@ -1,6 +1,7 @@
 // Some stupid rigidbody based movement by Dani
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
@@ -11,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     
     //Other
     private Rigidbody rb;
-    public MyWallRun WallRun;
+    public PersonalWallRun WallRun;
 
     //Rotation and look
     private float xRotation;
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool readyToJump = true;
     private float jumpCooldown = 0.25f;
     public float jumpForce = 550f;
-    
+
     //Sprinting
     private bool readyToSprint = true;
     
@@ -80,19 +81,19 @@ public class PlayerMovement : MonoBehaviour {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButton("Jump");
-        crouching = Input.GetKey(KeyCode.LeftControl);
-        sprinting = Input.GetKey(KeyCode.LeftShift);
+        crouching = Input.GetButton("Crouch");
+        sprinting = Input.GetButton("Sprint");
         
         //Sprinting
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetButtonDown("Sprint"))
             Sprint();
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetButtonUp("Sprint"))
             StopSprint();
       
         //Crouching
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetButtonDown("Crouch"))
             StartCrouch();
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetButtonUp("Crouch"))
             StopCrouch();
     }
 
@@ -150,7 +151,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         
         // Movement while sliding
-        if (grounded && crouching) multiplierV = 0f;
+        if (grounded && crouching) multiplierV = 0.2f;
 
         //Apply forces to move player
         if (move)
@@ -196,12 +197,12 @@ public class PlayerMovement : MonoBehaviour {
         {
             readyToSprint = false;
             //Apply sprint to player
-            maxSpeed = 20;
+            maxSpeed = 15;
         }
     }
     private void StopSprint()
     {
-        maxSpeed = 15;
+        maxSpeed = 10;
         readyToSprint = true;
     }
     
@@ -219,7 +220,7 @@ public class PlayerMovement : MonoBehaviour {
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //Perform the rotations
-        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, WallRun.tilt);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
 

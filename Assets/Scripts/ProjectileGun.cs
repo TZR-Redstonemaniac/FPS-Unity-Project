@@ -26,7 +26,6 @@ public class ProjectileGun : MonoBehaviour
 
     //Bools
     private bool shooting, readyToShoot, reloading;
-    private bool reloadPressed;
 
     //References
     public Camera fpsCam;
@@ -40,13 +39,6 @@ public class ProjectileGun : MonoBehaviour
     public bool allowInvoke = true;
     
     public RaycastHit hit;
-
-    public void ReloadInput(InputAction.CallbackContext context)
-    {
-        if (context.performed) reloadPressed = true;
-
-        if (context.canceled) reloadPressed = false;
-    }
 
     private void Awake()
     {
@@ -66,11 +58,11 @@ public class ProjectileGun : MonoBehaviour
     private void MyInput()
     {
         //Check if the button can be held down
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        if (allowButtonHold) shooting = Input.GetButton("Fire1");
+        else shooting = Input.GetButtonDown("Fire1");
         
         //Reloading
-        if(Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading) Reload();
+        if(Input.GetButtonDown("Reload") && bulletsLeft < magSize && !reloading) Reload();
         
         //Reload if shooting without ammo
         if(readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
