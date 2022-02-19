@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     public float moveSpeed = 4500;
     public float maxSpeed = 20;
     public LayerMask whatIsGround;
+    public PhysicMaterial groundMaterial;
     public bool move;
     
     public float counterMovement = 0.175f;
@@ -82,6 +83,12 @@ public class PlayerMovement : MonoBehaviour {
         Look();
         
         if (IsGrounded()) hasDoubleJump = true;
+        if (IsGrounded())
+        {
+            RaycastHit hit;
+            Physics.Raycast(transform.position, -Vector3.up, out hit);
+            hit.collider.material = groundMaterial;
+        }
         if (WallRun.isWallRunning) hasDoubleJump = true;
         
         if (IsGrounded() && Input.GetButtonDown("Jump"))

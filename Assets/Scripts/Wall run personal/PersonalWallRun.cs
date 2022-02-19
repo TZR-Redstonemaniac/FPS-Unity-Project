@@ -51,73 +51,86 @@ public class PersonalWallRun : MonoBehaviour
         RaycastHit leftHit;
         RaycastHit rightHit;
 
-        wallRight = Physics.Raycast(transform.position, orientation.right, out rightHit);
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftHit);
+        wallRight = Physics.Raycast(transform.position, orientation.right, out rightHit, wallDistance);
+        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftHit, wallDistance);
 
         if (!isWallRunning)
         {
             wallRunTimeLeft = Time.time + wallRunTimerDuration;
         }
 
-        if (wallRight && !playerMovement.IsGrounded() && Time.time <= wallRunTimeLeft && 
-            rightHit.distance <= wallDistance)
+        if (wallRight && !playerMovement.IsGrounded() && Time.time <= wallRunTimeLeft)
         {
             if (!isWallRunning)
             {
                 wallRunTimeLeft = Time.time + wallRunTimerDuration;
-                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, rb.velocity.z);
+                Vector3 vel = rb.velocity;
+                if (rb.velocity.y < 0.5f)
+                    rb.velocity = new Vector3(vel.x, 0, vel.z);
+                else if (rb.velocity.y > 0) 
+                    rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
+            }
+
+            foreach (var t in ignoreCollider)
+            {
+                if (lastWallNormal != rightHit.normal && rightHit.collider != ignoreCollider[0])
+                {
+                    isWallRunning = true;
+
+                    rb.useGravity = false;
+                    rb.AddForce(-rightHit.normal * wallRunPush * Time.deltaTime, ForceMode.Impulse);
+
+                    wallMesh = rightHit.collider;
+                    wallMesh.material = wallRunPhysicsMaterial;
+
+                    currentWallNormal = rightHit.normal;
+
+                    cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, 20f * Time.deltaTime);
+
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
+                        rb.AddForce(-orientation.right * wallRunJumpForce, ForceMode.Impulse);
+                    }
+                }
             }
             
-            if (lastWallNormal != rightHit.normal && rightHit.collider != ignoreCollider[0])
-            {
-                isWallRunning = true;
-
-                rb.useGravity = false;
-                rb.AddForce(-rightHit.normal * wallRunPush * Time.deltaTime, ForceMode.Impulse);
-
-                wallMesh = rightHit.collider;
-                wallMesh.material = wallRunPhysicsMaterial;
-
-                currentWallNormal = rightHit.normal;
-
-                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, 20f * Time.deltaTime);
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
-                    rb.AddForce(-orientation.right * wallRunJumpForce, ForceMode.Impulse);
-                }   
-            }
+            
         }
-        else if (wallLeft && !playerMovement.IsGrounded() && Time.time < wallRunTimeLeft && 
-                 leftHit.distance <= wallDistance)
+        else if (wallLeft && !playerMovement.IsGrounded() && Time.time < wallRunTimeLeft)
         {
-            
             if (!isWallRunning)
             {
                 wallRunTimeLeft = Time.time + wallRunTimerDuration;
-                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                Vector3 vel = rb.velocity;
+                if (rb.velocity.y < 0.5f)
+                    rb.velocity = new Vector3(vel.x, 0, vel.z);
+                else if (rb.velocity.y > 0) 
+                    rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
             }
-            
-            if (lastWallNormal != leftHit.normal && leftHit.collider != ignoreCollider[0])
+
+            foreach (var t in ignoreCollider)
             {
-                isWallRunning = true;
-                
-                rb.useGravity = false;
-                rb.AddForce(-leftHit.normal * wallRunPush * Time.deltaTime, ForceMode.Impulse);
-
-                wallMesh = leftHit.collider;
-                wallMesh.material = wallRunPhysicsMaterial;
-
-                currentWallNormal = leftHit.normal;
-                
-                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, 20f * Time.deltaTime);
-
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (lastWallNormal != leftHit.normal && leftHit.collider != t)
                 {
-                    rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
-                    rb.AddForce(orientation.right * wallRunJumpForce, ForceMode.Impulse);
-                }   
+                    isWallRunning = true;
+
+                    rb.useGravity = false;
+                    rb.AddForce(-leftHit.normal * wallRunPush * Time.deltaTime, ForceMode.Impulse);
+
+                    wallMesh = leftHit.collider;
+                    wallMesh.material = wallRunPhysicsMaterial;
+
+                    currentWallNormal = leftHit.normal;
+
+                    cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, 20f * Time.deltaTime);
+
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
+                        rb.AddForce(orientation.right * wallRunJumpForce, ForceMode.Impulse);
+                    }
+                }
             }
         }
         else
