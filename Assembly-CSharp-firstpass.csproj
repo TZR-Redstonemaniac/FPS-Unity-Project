@@ -275,14 +275,14 @@
  <Reference Include="UnityEditor.UnityConnectModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.28f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
- </Reference>
  <Reference Include="Rewired_Windows">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Windows.dll</HintPath>
  </Reference>
  <Reference Include="Rewired_Core">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Assets/Rewired/Internal/Libraries/Runtime/Rewired_Core.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.28f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

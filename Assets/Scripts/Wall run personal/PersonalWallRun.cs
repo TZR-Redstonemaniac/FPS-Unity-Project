@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 
@@ -20,7 +21,7 @@ public class PersonalWallRun : MonoBehaviour
     public float camTilt;
     public float camTiltTime;
     
-    public float tilt { get; private set; }
+    public float tilt { get; set; }
     
     public Camera cam;
 
@@ -31,9 +32,11 @@ public class PersonalWallRun : MonoBehaviour
     
     public Transform wallRunTransform;
     
-    private bool wallLeft;
-    private bool wallRight;
-    private bool isWallRunning;
+    public bool wallLeft;
+    public bool wallRight;
+    public bool isWallRunning;
+
+    public Collider[] ignoreCollider;
 
     private Collider wallMesh = null;
     
@@ -48,15 +51,16 @@ public class PersonalWallRun : MonoBehaviour
         RaycastHit leftHit;
         RaycastHit rightHit;
 
-        wallRight = Physics.Raycast(transform.position, orientation.right, out rightHit, wallDistance);
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftHit, wallDistance);
+        wallRight = Physics.Raycast(transform.position, orientation.right, out rightHit);
+        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftHit);
 
         if (!isWallRunning)
         {
             wallRunTimeLeft = Time.time + wallRunTimerDuration;
         }
 
-        if (wallRight && !playerMovement.grounded && Time.time <= wallRunTimeLeft)
+        if (wallRight && !playerMovement.IsGrounded() && Time.time <= wallRunTimeLeft && 
+            rightHit.distance <= wallDistance)
         {
             if (!isWallRunning)
             {
@@ -64,7 +68,7 @@ public class PersonalWallRun : MonoBehaviour
                 rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, rb.velocity.z);
             }
             
-            if (lastWallNormal != rightHit.normal)
+            if (lastWallNormal != rightHit.normal && rightHit.collider != ignoreCollider[0])
             {
                 isWallRunning = true;
 
@@ -77,7 +81,6 @@ public class PersonalWallRun : MonoBehaviour
                 currentWallNormal = rightHit.normal;
 
                 cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, 20f * Time.deltaTime);
-                tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -86,7 +89,8 @@ public class PersonalWallRun : MonoBehaviour
                 }   
             }
         }
-        else if (wallLeft && !playerMovement.grounded && Time.time < wallRunTimeLeft)
+        else if (wallLeft && !playerMovement.IsGrounded() && Time.time < wallRunTimeLeft && 
+                 leftHit.distance <= wallDistance)
         {
             
             if (!isWallRunning)
@@ -95,7 +99,7 @@ public class PersonalWallRun : MonoBehaviour
                 rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             }
             
-            if (lastWallNormal != leftHit.normal)
+            if (lastWallNormal != leftHit.normal && leftHit.collider != ignoreCollider[0])
             {
                 isWallRunning = true;
                 
@@ -108,8 +112,7 @@ public class PersonalWallRun : MonoBehaviour
                 currentWallNormal = leftHit.normal;
                 
                 cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, 20f * Time.deltaTime);
-                tilt = Mathf.Lerp(tilt, -camTilt, camTiltTime * Time.deltaTime);
-                
+
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     rb.AddForce(orientation.up * wallRunJumpForce, ForceMode.Impulse);
@@ -131,7 +134,6 @@ public class PersonalWallRun : MonoBehaviour
             isWallRunning = false;
             
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 90, 20f * Time.deltaTime);
-            tilt = Mathf.Lerp(tilt, 0, camTiltTime * Time.deltaTime);
 
             if (wallMesh != null)
             {

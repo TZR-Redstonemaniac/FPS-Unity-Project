@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     //Assignable
     public Transform playerCam;
     public Transform orientation;
+    public Collider playerCollider;
     
     //Other
     private Rigidbody rb;
@@ -23,7 +24,6 @@ public class PlayerMovement : MonoBehaviour {
     //Movement
     public float moveSpeed = 4500;
     public float maxSpeed = 20;
-    public bool grounded;
     public LayerMask whatIsGround;
     public bool move;
     
@@ -41,8 +41,10 @@ public class PlayerMovement : MonoBehaviour {
 
     //Jumping
     private bool readyToJump = true;
-    private float jumpCooldown = 0.25f;
+    private bool hasDoubleJump;
+    private float jumpCooldown = 0f;
     public float jumpForce = 550f;
+    private float distToGround;
 
     //Sprinting
     private bool readyToSprint = true;
@@ -52,7 +54,12 @@ public class PlayerMovement : MonoBehaviour {
     bool jumping, sprinting, crouching;
     
     //Sliding
-    private Vector3 normalVector = Vector3.up;
+    private readonly Vector3 normalVector = Vector3.up;
+    
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, whatIsGround);
+    }
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -62,6 +69,7 @@ public class PlayerMovement : MonoBehaviour {
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        distToGround = 1.6f;
     }
 
     
@@ -72,6 +80,38 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         MyInput();
         Look();
+        
+        if (IsGrounded()) hasDoubleJump = true;
+        if (WallRun.isWallRunning) hasDoubleJump = true;
+        
+        if (IsGrounded() && Input.GetButtonDown("Jump"))
+        {
+            //Add jump forces
+            rb.AddForce(Vector2.up * jumpForce * 1.5f);
+            rb.AddForce(normalVector * jumpForce * 0.5f);
+            
+            //If jumping while falling, reset y velocity.
+            Vector3 vel = rb.velocity;
+            if (rb.velocity.y < 0.5f)
+                rb.velocity = new Vector3(vel.x, 0, vel.z);
+            else if (rb.velocity.y > 0) 
+                rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z); 
+        } 
+        else if (!IsGrounded() && hasDoubleJump && Input.GetButtonDown("Jump") && !WallRun.isWallRunning)
+        {
+            //Add jump forces
+            rb.AddForce(Vector2.up * jumpForce * 1.5f);
+            rb.AddForce(normalVector * jumpForce * 0.5f);
+            
+            //If jumping while falling, reset y velocity.
+            Vector3 vel = rb.velocity;
+            if (rb.velocity.y < 0.5f)
+                rb.velocity = new Vector3(vel.x, 0, vel.z);
+            else if (rb.velocity.y > 0) 
+                rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
+
+            hasDoubleJump = false;
+        }
     }
 
     /// <summary>
@@ -80,7 +120,7 @@ public class PlayerMovement : MonoBehaviour {
     private void MyInput() {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
-        jumping = Input.GetButton("Jump");
+        jumping = Input.GetButtonDown("Jump");
         crouching = Input.GetButton("Crouch");
         sprinting = Input.GetButton("Sprint");
         
@@ -101,7 +141,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.localScale = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
         if (rb.velocity.magnitude > 0.5f) {
-            if (grounded) {
+            if (IsGrounded()) {
                 rb.AddForce(orientation.transform.forward * slideForce);
             }
         }
@@ -114,23 +154,20 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Movement() {
         //Extra gravity
-        if(useGravity) rb.AddForce(Vector3.down * Time.deltaTime * 10);
-        
+        rb.AddForce(Vector3.down * Time.deltaTime * 10);
+
         //Find actual velocity relative to where player is looking
         Vector2 mag = FindVelRelativeToLook();
         float xMag = mag.x, yMag = mag.y;
 
         //Counteract sliding and sloppy movement
         CounterMovement(x, y, mag);
-        
-        //If holding jump && ready to jump, then jump
-        if (readyToJump && jumping) Jump();
 
         //Set max speed
         float speed = this.maxSpeed;
         
         //If sliding down a ramp, add force down so player stays grounded and also builds speed
-        if (crouching && grounded && readyToJump) {
+        if (crouching && IsGrounded() && readyToJump) {
             rb.AddForce(Vector3.down * Time.deltaTime * 3000);
             return;
         }
@@ -145,13 +182,13 @@ public class PlayerMovement : MonoBehaviour {
         float multiplier = 1f, multiplierV = 1f;
         
         // Movement in air
-        if (!grounded) {
+        if (!IsGrounded()) {
             multiplier = 0.5f;
             multiplierV = 0.5f;
         }
         
         // Movement while sliding
-        if (grounded && crouching) multiplierV = 0.2f;
+        if (IsGrounded() && crouching) multiplierV = 0.2f;
 
         //Apply forces to move player
         if (move)
@@ -168,32 +205,9 @@ public class PlayerMovement : MonoBehaviour {
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier * moveMult);
     }
 
-    private void Jump() {
-        if (grounded && readyToJump) {
-            readyToJump = false;
-
-            //Add jump forces
-            rb.AddForce(Vector2.up * jumpForce * 1.5f);
-            rb.AddForce(normalVector * jumpForce * 0.5f);
-            
-            //If jumping while falling, reset y velocity.
-            Vector3 vel = rb.velocity;
-            if (rb.velocity.y < 0.5f)
-                rb.velocity = new Vector3(vel.x, 0, vel.z);
-            else if (rb.velocity.y > 0) 
-                rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
-            
-            Invoke(nameof(ResetJump), jumpCooldown);
-        }
-    }
-    
-    private void ResetJump() {
-        readyToJump = true;
-    }
-    
     private void Sprint()
     {
-        if (grounded && readyToSprint)
+        if (IsGrounded() && readyToSprint)
         {
             readyToSprint = false;
             //Apply sprint to player
@@ -220,12 +234,26 @@ public class PlayerMovement : MonoBehaviour {
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //Perform the rotations
+        if (WallRun.isWallRunning)
+        {
+            if (WallRun.wallRight)
+                WallRun.tilt = Mathf.Lerp(WallRun.tilt, WallRun.camTilt, WallRun.camTiltTime * Time.deltaTime);
+            
+            if (WallRun.wallLeft)
+                WallRun.tilt = Mathf.Lerp(WallRun.tilt, -WallRun.camTilt, WallRun.camTiltTime * Time.deltaTime);
+        }
+        else
+        {
+            WallRun.tilt = Mathf.Lerp(WallRun.tilt, 0, WallRun.camTiltTime * Time.deltaTime);
+        }
+            
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, WallRun.tilt);
+        
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
 
     private void CounterMovement(float CounterX, float CounterY, Vector2 mag) {
-        if (!grounded || jumping) return;
+        if (!IsGrounded() || jumping) return;
 
         //Slow down sliding
         if (crouching) {
@@ -266,44 +294,5 @@ public class PlayerMovement : MonoBehaviour {
         float xMag = magnitue * Mathf.Cos(v * Mathf.Deg2Rad);
         
         return new Vector2(xMag, yMag);
-    }
-
-    private bool IsFloor(Vector3 v) {
-        float angle = Vector3.Angle(Vector3.up, v);
-        return angle < maxSlopeAngle;
-    }
-
-    private bool cancellingGrounded;
-    
-    /// <summary>
-    /// Handle ground detection
-    /// </summary>
-    private void OnCollisionStay(Collision other) {
-        //Make sure we are only checking for walkable layers
-        int layer = other.gameObject.layer;
-        if (whatIsGround != (whatIsGround | (1 << layer))) return;
-
-        //Iterate through every collision in a physics update
-        for (int i = 0; i < other.contactCount; i++) {
-            Vector3 normal = other.contacts[i].normal;
-            //FLOOR
-            if (IsFloor(normal)) {
-                grounded = true;
-                cancellingGrounded = false;
-                normalVector = normal;
-                CancelInvoke(nameof(StopGrounded));
-            }
-        }
-
-        //Invoke ground/wall cancel, since we can't check normals with CollisionExit
-        float delay = 3f;
-        if (!cancellingGrounded) {
-            cancellingGrounded = true;
-            Invoke(nameof(StopGrounded), Time.deltaTime * delay);
-        }
-    }
-
-    private void StopGrounded() {
-        grounded = false;
     }
 }
