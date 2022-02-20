@@ -6,53 +6,62 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    //Assignable
-    public Transform playerCam;
-    public Transform orientation;
-    public Collider playerCollider;
-    
-    //Other
-    private Rigidbody rb;
-    public PersonalWallRun WallRun;
+    [Header("Transforms")]
+    [SerializeField] private Transform playerCam;
+    [SerializeField] private Transform orientation;
+    [SerializeField] private Transform head;
 
-    //Rotation and look
-    private float xRotation;
-    private float sensitivity = 50f;
-    public float sensMultiplier = 1f;
-    public Transform head;
+    [Header("Assignable")]
+    [SerializeField] private Collider playerCollider;
+    [SerializeField] private PhysicMaterial groundMaterial;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private PhysicMaterial[] ignoreMaterials;
     
-    //Movement
-    public float moveSpeed = 4500;
-    public float maxSpeed = 20;
-    public LayerMask whatIsGround;
-    public PhysicMaterial groundMaterial;
-    public bool move;
+    [Header("Scripts")]
+    [SerializeField] private PersonalWallRun WallRun;
+
+    [Header("Rotation and look")]
+    [SerializeField] private float sensMultiplier = 1f;
+
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 4500;
+    [SerializeField] private float maxSpeed = 20;
+    [SerializeField] private float counterMovement = 0.175f;
+
+    [Header("Crouch & Slide")]
+    [SerializeField] private float slideForce = 400;
+    [SerializeField] private float slideCounterMovement = 0.2f;
+
+    [Header("Jumping")] 
+    [SerializeField] private float jumpForce = 550f;
     
-    public float counterMovement = 0.175f;
-    private float threshold = 0.01f;
-    private float moveMult = 0.5f;
-    public float maxSlopeAngle = 35f;
-    public bool useGravity;
-
-    //Crouch & Slide
-    private readonly Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    private Vector3 playerScale;
-    public float slideForce = 400;
-    public float slideCounterMovement = 0.2f;
-
     //Jumping
-    private bool readyToJump = true;
-    private bool hasDoubleJump;
-    private float jumpCooldown = 0f;
-    public float jumpForce = 550f;
     private float distToGround;
+    private bool hasDoubleJump;
 
+    //Rotation & Look
+    private float xRotation;
+    private const float sensitivity = 50f;
+    
+    //Assignable
+    private Rigidbody rb;
+    
+    //Crouch & Slide
+    private Vector3 playerScale;
+    private readonly Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    
     //Sprinting
     private bool readyToSprint = true;
     
+    //Movement
+    private const float threshold = 0.01f;
+    private float moveMult = 0.5f;
+    [HideInInspector] public bool move;
+    [HideInInspector] public bool useGravity;
+    
     //Input
-    float x, y;
-    bool jumping, sprinting, crouching;
+    private float x, y;
+    private bool jumping, sprinting, crouching;
     
     //Sliding
     private readonly Vector3 normalVector = Vector3.up;
@@ -87,7 +96,12 @@ public class PlayerMovement : MonoBehaviour {
         {
             RaycastHit hit;
             Physics.Raycast(transform.position, -Vector3.up, out hit);
-            hit.collider.material = groundMaterial;
+            foreach (PhysicMaterial physicMaterial in ignoreMaterials)
+            {
+                if(hit.collider.material != physicMaterial)
+                    hit.collider.material = groundMaterial;
+            }
+            
         }
         if (WallRun.isWallRunning) hasDoubleJump = true;
         
@@ -161,7 +175,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Movement() {
         //Extra gravity
-        rb.AddForce(Vector3.down * Time.deltaTime * 10);
+        if(useGravity) rb.AddForce(Vector3.down * Time.deltaTime * 10);
 
         //Find actual velocity relative to where player is looking
         Vector2 mag = FindVelRelativeToLook();
@@ -174,7 +188,7 @@ public class PlayerMovement : MonoBehaviour {
         float speed = this.maxSpeed;
         
         //If sliding down a ramp, add force down so player stays grounded and also builds speed
-        if (crouching && IsGrounded() && readyToJump) {
+        if (crouching && IsGrounded()) {
             rb.AddForce(Vector3.down * Time.deltaTime * 3000);
             return;
         }

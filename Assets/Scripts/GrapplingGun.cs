@@ -6,19 +6,26 @@ using UnityEngine;
 public class GrapplingGun : MonoBehaviour
 {
     
-    private LineRenderer lr;
-    private Vector3 grapplePoint;
-    private bool grappleActivated;
-    private SpringJoint joint;
-
-    public LayerMask canBeGrappled;
+    [Header("Transform")]
     public Transform gunTip, mainCamera, player;
+    
+    [Header("Assignable")]
+    public LayerMask canBeGrappled;
     public GameObject claw;
-    public float maxDistance = 100f;
-    public bool grappleConnected;
     public ParticleSystem muzzleFlash;
     public PlayerMovement playerMovement;
+    
+    [Header("Values")]
+    public float maxDistance = 100f;
 
+    [HideInInspector] public bool grappleConnected;
+    
+    private LineRenderer lr;
+    private Vector3 grapplePoint;
+    private SpringJoint joint;
+    
+    private bool grappleActivated;
+    
     void Awake()
     {
         lr = GetComponent<LineRenderer>();

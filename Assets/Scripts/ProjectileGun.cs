@@ -7,38 +7,36 @@ using UnityEngine.InputSystem;
 
 public class ProjectileGun : MonoBehaviour
 {
-    //Bullet
-    public GameObject bullet;
+    [Header("Bullet")]
+    [SerializeField] private GameObject bullet;
     
-    //Bullet force
-    public float shootForce, upwardForce;
+    [Header("Bullet force")]
+    [SerializeField] private float shootForce, upwardForce;
     
-    //Gun stats
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    public int magSize, bulletsPerTap;
-    public bool allowButtonHold;
+    [Header("Gun stats")]
+    [SerializeField] private float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+    [SerializeField] private int magSize, bulletsPerTap;
+    [SerializeField] private bool allowButtonHold;
     
     private int bulletsLeft, bulletsShot;
-    
-    //Recoil
-    public Rigidbody playerRb;
-    public float recoilForce;
 
-    //Bools
+    //Booleans
     private bool shooting, readyToShoot, reloading;
 
-    //References
-    public Camera fpsCam;
-    public Transform attackPoint;
+    [Header("References")]
+    [SerializeField] private Camera fpsCam;
+    [SerializeField] private Transform attackPoint;
 
-    //Graphics
-    public GameObject muzzleFlash;
-    public TextMeshProUGUI ammoDisplay;
+    [Header("Graphics")]
+    [SerializeField] private GameObject muzzleFlash;
+    [SerializeField] private TextMeshProUGUI ammoDisplay;
     
-    //bug fixing :D
-    public bool allowInvoke = true;
-    
-    public RaycastHit hit;
+    [Header("Bug Fixing")]
+    [SerializeField] private bool allowInvoke = true;
+
+    private RaycastHit hit;
+
+    [HideInInspector] public Vector3 directionWithSpread;
 
     private void Awake()
     {
@@ -99,7 +97,7 @@ public class ProjectileGun : MonoBehaviour
         float y = UnityEngine.Random.Range(-spread, spread);
 
         //Calculate new direction with spread
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
+        directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
 
         //Instantiate bullet/projectile
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity); //store instantiated bullet in currentBullet
@@ -120,16 +118,13 @@ public class ProjectileGun : MonoBehaviour
         //Invoke resetShot function
         if (allowInvoke)
         {
-            Invoke("ResetShot", timeBetweenShooting);
+            Invoke(nameof(ResetShot), timeBetweenShooting);
             allowInvoke = false;
-
-            //Add recoil to player
-            playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
         }
         
         //If more than one bulletsPerTap make sure to repeat shoot function
         if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
+            Invoke(nameof(Shoot), timeBetweenShots);
     }
 
     private void ResetShot()
@@ -141,7 +136,7 @@ public class ProjectileGun : MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        Invoke("ReloadingFinished", reloadTime);
+        Invoke(nameof(ReloadingFinished), reloadTime);
     }
 
     private void ReloadingFinished()

@@ -69,7 +69,6 @@
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ThemeSettings.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\LanguageData.cs" />
      <Compile Include="Assets\Scripts\PortalCamera.cs" />
-     <Compile Include="Assets\TraceUtil\Tracer.cs" />
      <Compile Include="Assets\Inputs\Controls.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ScrollRectSelectableChild.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
@@ -86,20 +85,16 @@
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CustomSlider.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\Window.cs" />
      <Compile Include="Assets\Scripts\PlayerAiming.cs" />
-     <Compile Include="Assets\Movement\MoveData.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Examples\ControlMapperDemo\Scripts\ControlMapperDemoMessage.cs" />
-     <Compile Include="Assets\Movement\SurfController.cs" />
      <Compile Include="Assets\Scripts\CollectiblesCollected.cs" />
      <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CustomToggle.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ToggleInfo.cs" />
-     <Compile Include="Assets\Movement\SurfCharacter.cs" />
      <Compile Include="Assets\Scripts\MyMoveCamera.cs" />
-     <Compile Include="Assets\Movement\ISurfControllable.cs" />
      <Compile Include="Assets\Scripts\ProjectileGun.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ButtonInfo.cs" />
-     <Compile Include="Assets\MyWallRun.cs" />
+     <Compile Include="Assets\Scripts\MyWallRun.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
      <Compile Include="Assets\Rewired\Examples\FallbackJoystickIdentification\Scripts\FallbackJoystickIdentificationDemo.cs" />
@@ -114,7 +109,6 @@
      <Compile Include="Assets\Titanfall Test\PlayerMovementTF2.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CanvasScalerFitter.cs" />
      <Compile Include="Assets\Scripts\StepClimber.cs" />
-     <Compile Include="Assets\Movement\MovementConfig.cs" />
      <Compile Include="Assets\Rewired\Examples\SimpleControlRemapping\Scripts\SimpleControlRemapping.cs" />
      <Compile Include="Assets\Rewired\Examples\PressStartToJoin\Scripts\PressStartToJoinExample_Assigner.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CustomButton.cs" />
@@ -133,7 +127,7 @@
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ControlMapper_Enums.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\InputBehaviorWindow.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
-     <Compile Include="Assets\CustomTag.cs" />
+     <Compile Include="Assets\Scripts\CustomTag.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
      <Compile Include="Assets\Extensions\IntExtensions.cs" />
      <Compile Include="Assets\Scripts\RotateGun.cs" />
@@ -152,8 +146,6 @@
      <Compile Include="Assets\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
      <Compile Include="Assets\Scripts\Wall run personal\WallRunningScript.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIElementInfo.cs" />
-     <Compile Include="Assets\TraceUtil\Trace.cs" />
-     <Compile Include="Assets\Movement\SurfPhysics.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\LanguageDataBase.cs" />
      <Compile Include="Assets\Scripts\OptionsMenu.cs" />
@@ -187,7 +179,6 @@
      <Compile Include="Assets\Scripts\PortalTextureSetup.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CalibrationWindow.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ThemedElement.cs" />
-     <Compile Include="Assets\Movement\InputButtons.cs" />
      <Compile Include="Assets\Rewired\Examples\DualShock4SpecialFeatures\Scripts\DualShock4SpecialFeaturesExample.cs" />
      <Compile Include="Assets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
      <Compile Include="Assets\Rewired\Examples\EightPlayers\Scripts\EightPlayersExample_Player.cs" />
@@ -211,6 +202,9 @@
      <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
+     <Compile Include="Assets\Scripts\WeaponSwitching.cs" />
+     <Compile Include="Assets\Western Props\Scripts\Destructible.cs" />
+     <Compile Include="Assets\Scripts\Grenade.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

@@ -2492,23 +2492,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 1320935711}
   orientation: {fileID: 1886169071}
-  playerCollider: {fileID: 770167795}
-  WallRun: {fileID: 770167794}
-  sensMultiplier: 1
   head: {fileID: 1529520169}
-  moveSpeed: 4500
-  maxSpeed: 10
+  playerCollider: {fileID: 770167795}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  groundMaterial: {fileID: 0}
-  move: 0
-  counterMovement: 0.175
+  groundMaterial: {fileID: 13400000, guid: 069dde0f625b1604280ee231a263e668, type: 2}
+  WallRun: {fileID: 770167794}
+  sensMultiplier: 1
+  moveSpeed: 4500
+  maxSpeed: 10
   maxSlopeAngle: 50
+  counterMovement: 0.175
   useGravity: 0
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 550
+  move: 0
 --- !u!114 &770167794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2522,7 +2522,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 1886169071}
+  wallRunTransform: {fileID: 1857839042}
   rb: {fileID: 770167792}
+  cam: {fileID: 332748699}
+  wallRunPhysicsMaterial: {fileID: 13400000, guid: ce4478b067bba1d4dab4de8d1854a585, type: 2}
+  groundPhysicsMaterial: {fileID: 13400000, guid: 069dde0f625b1604280ee231a263e668, type: 2}
+  playerMovement: {fileID: 770167793}
+  ignoreCollider:
+  - {fileID: 770167795}
   wallDistance: 0.8
   wallRunPush: 7
   wallRunJumpForce: 8
@@ -2531,16 +2538,9 @@ MonoBehaviour:
   wallRunFov: 110
   camTilt: 20
   camTiltTime: 20
-  cam: {fileID: 332748699}
-  wallRunPhysicsMaterial: {fileID: 13400000, guid: ce4478b067bba1d4dab4de8d1854a585, type: 2}
-  groundPhysicsMaterial: {fileID: 13400000, guid: 069dde0f625b1604280ee231a263e668, type: 2}
-  playerMovement: {fileID: 770167793}
-  wallRunTransform: {fileID: 1857839042}
   wallLeft: 0
   wallRight: 0
   isWallRunning: 0
-  ignoreCollider:
-  - {fileID: 770167795}
 --- !u!136 &770167795
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5000,17 +5000,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127728703e63d17409b0e8988443b81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBeGrappled:
-    serializedVersion: 2
-    m_Bits: 576
   gunTip: {fileID: 1462248629}
   mainCamera: {fileID: 332748698}
   player: {fileID: 770167791}
+  canBeGrappled:
+    serializedVersion: 2
+    m_Bits: 576
   claw: {fileID: 528685626}
-  maxDistance: 100
-  grappleConnected: 0
   muzzleFlash: {fileID: 932731782}
   playerMovement: {fileID: 770167793}
+  maxDistance: 100
+  grappleConnected: 0
 --- !u!1 &1838554149
 GameObject:
   m_ObjectHideFlags: 0

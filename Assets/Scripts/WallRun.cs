@@ -12,7 +12,7 @@ public class WallRun : MonoBehaviour
     private bool isLeftWall;
 
     //Used for effects etc.
-    private static bool isWallRunning;
+    // private static bool isWallRunning;
     //<<Summary>> Checks the distance from walls and takes the wall that is the closest to the player
     private float distanceFromLeftWall;
     private float distanceFromRightWall;
@@ -62,7 +62,7 @@ public class WallRun : MonoBehaviour
     {
         if (collision.transform.CompareTag("RunnableWall"))
         {
-            isWallRunning = true;
+            //isWallRunning = true;
             rb.useGravity = false;
 
             if (isLeftWall)
@@ -97,7 +97,7 @@ public class WallRun : MonoBehaviour
         if (collision.transform.CompareTag("RunnableWall"))
         {
             cam.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-            isWallRunning = false;
+            //isWallRunning = false;
             rb.useGravity = true;
         }
     }

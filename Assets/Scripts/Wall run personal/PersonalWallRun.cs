@@ -7,36 +7,37 @@ using UnityEngine.ProBuilder;
 
 public class PersonalWallRun : MonoBehaviour
 {
+    
+    [Header("Transform")]
+    [SerializeField] private Transform orientation;
+    [SerializeField] private Transform wallRunTransform;
 
-    public Transform orientation;
+    [Header("Assignable")]
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Camera cam;
+    [SerializeField] private PhysicMaterial wallRunPhysicsMaterial;
+    [SerializeField] private PhysicMaterial groundPhysicsMaterial;
+    [SerializeField] private Collider[] ignoreCollider;
+    
+    [Header("Scripts")]
+    [SerializeField] private PlayerMovement playerMovement;
 
-    public Rigidbody rb;
-
-    public float wallDistance;
-    public float wallRunPush;
-    public float wallRunJumpForce;
-    public float wallRunTimerDuration;
-    public float wallRunCooldown;
-    public float wallRunFov;
+    [Header("Wall Run Values")]
+    [SerializeField] private float wallDistance;
+    [SerializeField] private float wallRunPush;
+    [SerializeField] private float wallRunJumpForce;
+    [SerializeField] private float wallRunTimerDuration;
+    [SerializeField] private float wallRunCooldown;
+    [SerializeField] private float wallRunFov;
+    
     public float camTilt;
     public float camTiltTime;
     
     public float tilt { get; set; }
     
-    public Camera cam;
-
-    public PhysicMaterial wallRunPhysicsMaterial;
-    public PhysicMaterial groundPhysicsMaterial;
-
-    public PlayerMovement playerMovement;
-    
-    public Transform wallRunTransform;
-    
-    public bool wallLeft;
-    public bool wallRight;
-    public bool isWallRunning;
-
-    public Collider[] ignoreCollider;
+    [HideInInspector] public bool wallLeft;
+    [HideInInspector] public bool wallRight;
+    [HideInInspector] public bool isWallRunning;
 
     private Collider wallMesh = null;
     
@@ -46,7 +47,7 @@ public class PersonalWallRun : MonoBehaviour
     private Vector3 lastWallNormal;
     private Vector3 currentWallNormal;
     
-    private void Update()
+    private void LateUpdate()
     {
         RaycastHit leftHit;
         RaycastHit rightHit;
@@ -61,19 +62,14 @@ public class PersonalWallRun : MonoBehaviour
 
         if (wallRight && !playerMovement.IsGrounded() && Time.time <= wallRunTimeLeft)
         {
-            if (!isWallRunning)
+            if (!isWallRunning && Time.time < currentCooldown)
             {
                 wallRunTimeLeft = Time.time + wallRunTimerDuration;
-                Vector3 vel = rb.velocity;
-                if (rb.velocity.y < 0.5f)
-                    rb.velocity = new Vector3(vel.x, 0, vel.z);
-                else if (rb.velocity.y > 0) 
-                    rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
             }
 
-            foreach (var t in ignoreCollider)
+            foreach (Collider collider in ignoreCollider)
             {
-                if (lastWallNormal != rightHit.normal && rightHit.collider != ignoreCollider[0])
+                if (lastWallNormal != rightHit.normal && rightHit.collider != collider)
                 {
                     isWallRunning = true;
 
@@ -99,19 +95,14 @@ public class PersonalWallRun : MonoBehaviour
         }
         else if (wallLeft && !playerMovement.IsGrounded() && Time.time < wallRunTimeLeft)
         {
-            if (!isWallRunning)
+            if (!isWallRunning  && Time.time < currentCooldown)
             {
                 wallRunTimeLeft = Time.time + wallRunTimerDuration;
-                Vector3 vel = rb.velocity;
-                if (rb.velocity.y < 0.5f)
-                    rb.velocity = new Vector3(vel.x, 0, vel.z);
-                else if (rb.velocity.y > 0) 
-                    rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
             }
 
-            foreach (var t in ignoreCollider)
+            foreach (Collider collider in ignoreCollider)
             {
-                if (lastWallNormal != leftHit.normal && leftHit.collider != t)
+                if (lastWallNormal != leftHit.normal && leftHit.collider != collider)
                 {
                     isWallRunning = true;
 
