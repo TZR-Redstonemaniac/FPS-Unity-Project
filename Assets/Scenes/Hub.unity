@@ -632,13 +632,12 @@ MonoBehaviour:
   magSize: 4
   bulletsPerTap: 1
   allowButtonHold: 0
-  playerRb: {fileID: 770167792}
-  recoilForce: 50
   fpsCam: {fileID: 332748699}
   attackPoint: {fileID: 1606283234}
   muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   ammoDisplay: {fileID: 0}
   allowInvoke: 1
+  directionWithSpread: {x: 0, y: 0, z: 0}
 --- !u!1 &155545084
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +680,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155545084}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2494,21 +2493,21 @@ MonoBehaviour:
   orientation: {fileID: 1886169071}
   head: {fileID: 1529520169}
   playerCollider: {fileID: 770167795}
+  groundMaterial: {fileID: 13400000, guid: 069dde0f625b1604280ee231a263e668, type: 2}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  groundMaterial: {fileID: 13400000, guid: 069dde0f625b1604280ee231a263e668, type: 2}
+  ignoreMaterials: []
   WallRun: {fileID: 770167794}
   sensMultiplier: 1
   moveSpeed: 4500
   maxSpeed: 10
-  maxSlopeAngle: 50
   counterMovement: 0.175
-  useGravity: 0
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 550
   move: 0
+  useGravity: 0
 --- !u!114 &770167794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2527,9 +2526,9 @@ MonoBehaviour:
   cam: {fileID: 332748699}
   wallRunPhysicsMaterial: {fileID: 13400000, guid: ce4478b067bba1d4dab4de8d1854a585, type: 2}
   groundPhysicsMaterial: {fileID: 13400000, guid: 069dde0f625b1604280ee231a263e668, type: 2}
-  playerMovement: {fileID: 770167793}
   ignoreCollider:
   - {fileID: 770167795}
+  playerMovement: {fileID: 770167793}
   wallDistance: 0.8
   wallRunPush: 7
   wallRunJumpForce: 8
@@ -3948,13 +3947,12 @@ MonoBehaviour:
   magSize: 30
   bulletsPerTap: 1
   allowButtonHold: 1
-  playerRb: {fileID: 770167792}
-  recoilForce: 1
   fpsCam: {fileID: 332748699}
   attackPoint: {fileID: 1522111885}
   muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   ammoDisplay: {fileID: 0}
   allowInvoke: 1
+  directionWithSpread: {x: 0, y: 0, z: 0}
 --- !u!1 &1417351831
 GameObject:
   m_ObjectHideFlags: 0
