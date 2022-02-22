@@ -13,6 +13,7 @@ TagManager:
   - Stone
   - ProjectileGunObject
   - RunnableWall
+  - TimeManager
   layers:
   - Default
   - TransparentFX

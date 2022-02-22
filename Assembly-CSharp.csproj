@@ -86,6 +86,7 @@
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\Window.cs" />
      <Compile Include="Assets\Scripts\PlayerAiming.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Examples\ControlMapperDemo\Scripts\ControlMapperDemoMessage.cs" />
+     <Compile Include="Assets\Western Props\Scripts\Destructible.cs" />
      <Compile Include="Assets\Scripts\CollectiblesCollected.cs" />
      <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CustomToggle.cs" />
@@ -157,6 +158,7 @@
      <Compile Include="Assets\Dani\MoveCamera.cs" />
      <Compile Include="Assets\Rewired\Examples\PlayerMouseUnityUI\Scripts\UIPointer.cs" />
      <Compile Include="Assets\Scripts\Ladder.cs" />
+     <Compile Include="Assets\Scripts\Grenade.cs" />
      <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
      <Compile Include="Assets\Rewired\Internal\Scripts\InputManager.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CanvasScalerExt.cs" />
@@ -179,6 +181,7 @@
      <Compile Include="Assets\Scripts\PortalTextureSetup.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CalibrationWindow.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ThemedElement.cs" />
+     <Compile Include="Assets\Scripts\WeaponSwitching.cs" />
      <Compile Include="Assets\Rewired\Examples\DualShock4SpecialFeatures\Scripts\DualShock4SpecialFeaturesExample.cs" />
      <Compile Include="Assets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
      <Compile Include="Assets\Rewired\Examples\EightPlayers\Scripts\EightPlayersExample_Player.cs" />
@@ -202,9 +205,10 @@
      <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
-     <Compile Include="Assets\Scripts\WeaponSwitching.cs" />
-     <Compile Include="Assets\Western Props\Scripts\Destructible.cs" />
-     <Compile Include="Assets\Scripts\Grenade.cs" />
+     <Compile Include="Assets\GrenadeThrower.cs" />
+     <Compile Include="Assets\TimeManager.cs" />
+     <Compile Include="Assets\TimeBody.cs" />
+     <Compile Include="Assets\Classes\PointInTime.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
