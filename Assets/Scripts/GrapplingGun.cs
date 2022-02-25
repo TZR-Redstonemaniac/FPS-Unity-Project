@@ -2,49 +2,41 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class GrapplingGun : MonoBehaviour
 {
     
     [Header("Transform")]
-    public Transform gunTip, mainCamera, player;
+    public Transform gunTip;
+    public Transform player;
+    public Transform mainCamera;
+    
     
     [Header("Assignable")]
     public LayerMask canBeGrappled;
-    public GameObject claw;
     public ParticleSystem muzzleFlash;
     public PlayerMovement playerMovement;
-    
+
     [Header("Values")]
     public float maxDistance = 100f;
 
     [HideInInspector] public bool grappleConnected;
     
-    private LineRenderer lr;
-    private Vector3 grapplePoint;
+    [HideInInspector]public Vector3 grapplePoint;
     private SpringJoint joint;
     
     private bool grappleActivated;
-    
-    void Awake()
-    {
-        lr = GetComponent<LineRenderer>();
-    }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !grappleActivated)
+        if (Input.GetButtonDown("Ability 1") && !grappleActivated)
         {
             StartGrapple();
-        } else if (Input.GetButtonUp("Fire1"))
+        } else if (Input.GetButtonUp("Ability 1"))
         {
             StopGrapple();
         }
-    }
-
-    private void LateUpdate()
-    {
-        DrawRope();
     }
 
     void StartGrapple()
@@ -61,7 +53,6 @@ public class GrapplingGun : MonoBehaviour
             }
             
             grappleConnected = true;
-            claw.gameObject.SetActive(false);
             grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
@@ -78,30 +69,17 @@ public class GrapplingGun : MonoBehaviour
 
             joint.connectedBody = hit.rigidbody;
 
-            lr.positionCount = 2;
-            
             playerMovement.move = false;
         }
     }
 
-    void DrawRope()
-    {
-        if(!joint) return;
-        
-        lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, grapplePoint);
-    }
-
     void StopGrapple()
     {
-        claw.gameObject.SetActive(true);
         grappleActivated = false;
         grappleConnected = false;
 
-        lr.positionCount = 0;
-
         playerMovement.move = true;
-        
+
         Destroy(joint);
     }
 
@@ -110,7 +88,7 @@ public class GrapplingGun : MonoBehaviour
         return joint != null;
     }
 
-    public Vector3 GetGrapplingPoint()
+    public Vector3 GetGrapplePoint()
     {
         return grapplePoint;
     }

@@ -8,7 +8,6 @@ public class RotateGun : MonoBehaviour
 {
 
     public GrapplingGun grapple;
-    public WeaponSway sway;
 
     private Quaternion desiredRotation;
     private float rotationSpeed = 5f;
@@ -18,12 +17,10 @@ public class RotateGun : MonoBehaviour
         if (!grapple.grappleConnected)
         {
             desiredRotation = transform.parent.rotation;
-            sway.rotateGun = true;
         }
         else
         {
-            desiredRotation = Quaternion.LookRotation(grapple.GetGrapplingPoint() - transform.position);
-            sway.rotateGun = false;
+            desiredRotation = Quaternion.LookRotation((grapple.grapplePoint - transform.position), Vector3.up);
         }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
