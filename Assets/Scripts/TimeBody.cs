@@ -66,12 +66,16 @@ public class TimeBody : MonoBehaviour
     private void StartRewind()
     {
         isRewinding = true;
-        rb.isKinematic = true;
+        
+        if(rb != null)
+            rb.isKinematic = true;
     }
 
     private void StopRewind()
     {
         isRewinding = false;
-        rb.isKinematic = false;
+        
+        if(rb != null)
+            rb.isKinematic = false;
     }
 }
