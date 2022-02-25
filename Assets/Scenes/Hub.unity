@@ -486,7 +486,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapple: {fileID: 1732826441}
-  sway: {fileID: 98107845}
 --- !u!1 &111438181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,7 +1218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1679,11 +1678,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &528685626 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7188561256969975333, guid: 932f4a86726ff0c488904e9b094856cf, type: 3}
-  m_PrefabInstance: {fileID: 19555561}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &528685627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1597276132115733692, guid: 932f4a86726ff0c488904e9b094856cf, type: 3}
@@ -2573,7 +2567,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4018,7 +4012,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4662,7 +4656,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4999,16 +4993,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunTip: {fileID: 1462248629}
-  mainCamera: {fileID: 332748698}
   player: {fileID: 770167791}
+  mainCamera: {fileID: 332748698}
   canBeGrappled:
     serializedVersion: 2
     m_Bits: 576
-  claw: {fileID: 528685626}
   muzzleFlash: {fileID: 932731782}
   playerMovement: {fileID: 770167793}
+  animation: {fileID: 0}
   maxDistance: 100
   grappleConnected: 0
+  grapplePoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1838554149
 GameObject:
   m_ObjectHideFlags: 0
@@ -5827,7 +5822,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6072,6 +6067,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 622543280296203739, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
+    - target: {fileID: 669045566788517796, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
+    - target: {fileID: 1563538548218446560, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
+    - target: {fileID: 1874522146055435399, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
     - target: {fileID: 3027654470203771634, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 4.98
@@ -6132,10 +6143,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6639841056927951268, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
     - target: {fileID: 6643550705005766214, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 4.98
       objectReference: {fileID: 0}
+    - target: {fileID: 7331463834697285410, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
     - target: {fileID: 8577411153945375943, guid: 8d935fee25f845f409c1e539c7e76b9d, type: 3}
       propertyPath: m_Name
       value: Portal

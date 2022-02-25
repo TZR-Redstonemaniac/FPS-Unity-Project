@@ -6,7 +6,7 @@ using UnityEngine;
 public class TimeBody : MonoBehaviour
 {
 
-    [SerializeField] private bool isRewinding = false;
+    public bool isRewinding = false;
 
     [SerializeField] private float recordTime = 5f;
 
@@ -63,13 +63,13 @@ public class TimeBody : MonoBehaviour
         pointsInTime.Insert(0, new PointInTime(transform.position, transform.rotation));
     }
 
-    public void StartRewind()
+    private void StartRewind()
     {
         isRewinding = true;
         rb.isKinematic = true;
     }
-    
-    public void StopRewind()
+
+    private void StopRewind()
     {
         isRewinding = false;
         rb.isKinematic = false;
