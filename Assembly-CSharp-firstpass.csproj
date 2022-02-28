@@ -728,6 +728,12 @@
  <Reference Include="Unity.RenderPipelines.Core.Editor">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.AI.Navigation">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.AI.Navigation.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.AI.Navigation.Editor">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.AI.Navigation.Editor.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
