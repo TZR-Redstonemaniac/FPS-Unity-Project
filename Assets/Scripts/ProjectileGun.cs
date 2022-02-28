@@ -11,11 +11,16 @@ public class ProjectileGun : MonoBehaviour
     [SerializeField] private GameObject bullet;
     
     [Header("Bullet force")]
-    [SerializeField] private float shootForce, upwardForce;
+    [SerializeField] private float shootForce;
+    [SerializeField] private float upwardForce;
     
     [Header("Gun stats")]
-    [SerializeField] private float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    [SerializeField] private int magSize, bulletsPerTap;
+    [SerializeField] private float spread;
+    [SerializeField] private float reloadTime;
+    [SerializeField] private float timeBetweenShooting;
+    [SerializeField] private float timeBetweenShots;
+    [SerializeField] private int bulletsPerTap;
+    [SerializeField] private int magSize;
     [SerializeField] private bool allowButtonHold;
     
     private int bulletsLeft, bulletsShot;
