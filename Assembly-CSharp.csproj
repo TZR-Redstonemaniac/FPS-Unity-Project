@@ -65,6 +65,8 @@
      <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
      <Compile Include="Assets\Rewired\Examples\ControlRemapping1\Scripts\ControlRemappingDemo1.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
+     <Compile Include="Assets\EnemyAi.cs" />
+     <Compile Include="Assets\NavMeshUpdater.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CustomSlider.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\Window.cs" />
      <Compile Include="Assets\Scripts\PlayerAiming.cs" />
@@ -98,6 +100,7 @@
      <Compile Include="Assets\Rewired\Integration\UnityUI\PlayerPointerEventData.cs" />
      <Compile Include="Assets\Rewired\Examples\PressAnyButtonToJoin\Scripts\PressAnyButtonToJoinExample_Assigner.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UISelectionUtility.cs" />
+     <Compile Include="Assets\Pickup.cs" />
      <Compile Include="Assets\Scripts\OptionsMenu.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
      <Compile Include="Assets\Rewired\Examples\SimpleCombinedKeyboardMouseRemapping\Scripts\SimpleCombinedKeyboardMouseRemapping.cs" />
@@ -113,13 +116,17 @@
      <Compile Include="Assets\Scripts\Trampoline.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
      <Compile Include="Assets\Rewired\Integration\UnityUI\RewiredEventSystem.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Scripts\PortalTextureSetup.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CalibrationWindow.cs" />
      <Compile Include="Assets\Scripts\WeaponSwitching.cs" />
      <Compile Include="Assets\Rewired\Examples\DualShock4SpecialFeatures\Scripts\DualShock4SpecialFeaturesExample.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Demo\ShakeDemo.cs" />
      <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\CustomControllerDemo_Player.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeByDistance.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeOnKeyPress.cs" />
      <Compile Include="Assets\Scripts\GrenadeThrower.cs" />
      <Compile Include="Assets\Scripts\GrapplingGun2.cs" />
      <Compile Include="Assets\Rewired\Integration\UnityUI\RewiredStandaloneInputModule.cs" />
@@ -153,8 +160,11 @@
      <Compile Include="Assets\Scripts\CollectiblesCollected.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\CustomToggle.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\ToggleInfo.cs" />
+     <Compile Include="Assets\CameraShake.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\Scripts\MyPlayerMovement.cs" />
+     <Compile Include="Assets\RobotController.cs" />
      <Compile Include="Assets\Rewired\Internal\Scripts\ControllerTemplates\ControllerTemplates.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
      <Compile Include="Assets\Dani\PlayerMovement.cs" />
@@ -165,6 +175,7 @@
      <Compile Include="Assets\Rewired\Internal\Scripts\Misc\ExternalTools.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
+     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
      <Compile Include="Assets\Scripts\WeaponSway.cs" />
      <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
@@ -177,6 +188,7 @@
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIControl.cs" />
      <Compile Include="Assets\Rewired\Examples\PlayerMouseSprite\Scripts\PlayerMouseSpriteExample.cs" />
      <Compile Include="Assets\Scripts\Wall run personal\PersonalWallRun.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
      <Compile Include="Assets\Scripts\Wall run personal\WallRunningScript.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIElementInfo.cs" />
@@ -184,6 +196,7 @@
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\LanguageDataBase.cs" />
      <Compile Include="Assets\Rewired\Examples\PlayerMouseUnityUI\Scripts\PlayerPointerEventHandlerExample.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
+     <Compile Include="Assets\FpsCounter.cs" />
      <Compile Include="Assets\Dani\MoveCamera.cs" />
      <Compile Include="Assets\Rewired\Examples\PlayerMouseUnityUI\Scripts\UIPointer.cs" />
      <Compile Include="Assets\Scripts\Grenade.cs" />
@@ -193,6 +206,7 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
      <Compile Include="Assets\Titanfall Test\CameraController.cs" />
      <Compile Include="Assets\Rewired\Examples\GamepadTemplateUI\Scripts\ControllerUIElement.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeOnTrigger.cs" />
      <Compile Include="Assets\Rewired\Examples\PressAnyButtonToJoin\Scripts\PressAnyButtonToJoinExample_GamePlayer.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\AnimationPlayer.cs" />
@@ -203,6 +217,7 @@
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerLook.cs" />
      <Compile Include="Assets\Rewired\Examples\CustomControllersTouch\Scripts\TouchJoystickExample.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\Rewired\Integration\UnityUI\RewiredPointerInputModule.cs" />
      <Compile Include="Assets\Rewired\Examples\Shared\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraWaterCheck.cs" />
@@ -213,10 +228,6 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
      <Compile Include="Assets\Scripts\TimeManager.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
-     <Compile Include="Assets\FpsCounter.cs" />
-     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
-     <Compile Include="Assets\RobotController.cs" />
-     <Compile Include="Assets\EnemyAi.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
@@ -880,11 +891,11 @@
  <Reference Include="Unity.ProGrids.Editor">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
- <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
@@ -894,6 +905,12 @@
  </Reference>
  <Reference Include="Unity.ShaderGraph.Editor">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Cinemachine">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.cinemachine.editor">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Runtime">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
@@ -916,17 +933,17 @@
  <Reference Include="Unity.Mathematics.Editor">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.AI.Navigation.Editor">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.AI.Navigation.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.AI.Navigation">
+ <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.AI.Navigation.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.ProGrids">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Editor">
  <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.AI.Navigation">
- <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.AI.Navigation.dll</HintPath>
- </Reference>
- <Reference Include="Unity.AI.Navigation.Editor">
- <HintPath>C:/Users/khali/OneDrive/Documents/GitHub/Unity-Project/Library/ScriptAssemblies/Unity.AI.Navigation.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

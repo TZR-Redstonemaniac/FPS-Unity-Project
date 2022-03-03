@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using EZCameraShake;
 
 public class BulletPhysics : MonoBehaviour
 {
+    
+    //////////////////////////////////////////Public Variables//////////////////////////////////////////
     
     [Header("Assignable")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject explosion;
     [SerializeField] private LayerMask whatIsEnemies;
-    
+
     [Header("Stats")]
     [Range(0f, 1f)] [SerializeField] private float bounciness;
     [SerializeField] private bool useGravity;
@@ -24,8 +27,7 @@ public class BulletPhysics : MonoBehaviour
     [SerializeField] private float explosionRange;
     [SerializeField] private float explosionForce;
     [SerializeField] private bool doExplode;
-    
-    
+
     [Header("Lifetime")]
     [SerializeField] private int maxCollisions;
     [SerializeField] private float maxLifetime;
@@ -37,6 +39,8 @@ public class BulletPhysics : MonoBehaviour
     [SerializeField] private GameObject stoneImpact;
     [SerializeField] private GameObject metalImpact;
     [SerializeField] private GameObject woodImpact;
+    
+    //////////////////////////////////////////Private Variables//////////////////////////////////////////
 
     private int collisions;
     private PhysicMaterial physicMaterial;
@@ -86,6 +90,9 @@ public class BulletPhysics : MonoBehaviour
                 t.GetComponent<Rigidbody>()
                     .AddExplosionForce(explosionForce, transform.position, explosionRange);
         }
+        
+        //Add camera shake
+        CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, 1f);
         
         //Add a little delay to avoid bugs
         Invoke(nameof(Delay), 0.01f);

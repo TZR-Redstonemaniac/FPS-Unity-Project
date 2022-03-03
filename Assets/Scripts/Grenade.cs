@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class Grenade : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float explosionForce = 700f;
 
     [SerializeField] private GameObject explosionEffect;
-    
+
     private TimeManager timeManager;
     private GameObject timeManagerGameObject;
 
@@ -42,6 +43,9 @@ public class Grenade : MonoBehaviour
     {
         //Show explosion
         Instantiate(explosionEffect, transform.position, transform.rotation);
+        
+        //Slow down time
+        timeManager.DoSlowMotion();
 
         //Get nearby objects
         Collider[] collidersToDestroy = Physics.OverlapSphere(transform.position, radius);
@@ -53,10 +57,7 @@ public class Grenade : MonoBehaviour
             if(dest != null)
                 dest.Destroy();
         }
-        
-        //Slow down time
-        timeManager.DoSlowMotion();
-        
+
         Collider[] collidersToMove = Physics.OverlapSphere(transform.position, radius);
 
         foreach (Collider nearbyObject in collidersToMove)
@@ -67,6 +68,9 @@ public class Grenade : MonoBehaviour
             if(rb != null)
                 rb.AddExplosionForce(explosionForce, transform.position, radius);
         }
+
+        //Add camera shake
+        CameraShaker.Instance.ShakeOnce(6f, 6f, .1f, 1f);
 
         //Remove Grenade
         Destroy(gameObject);

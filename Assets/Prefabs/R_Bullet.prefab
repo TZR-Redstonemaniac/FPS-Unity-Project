@@ -133,10 +133,12 @@ MonoBehaviour:
     m_Bits: 2048
   bounciness: 0
   useGravity: 0
+  damage: 0
   explosionDamage: 0
   explosionRange: 0
   explosionForce: 0
-  maxCollisions: 0
+  doExplode: 0
+  maxCollisions: 1
   maxLifetime: 100
   explodeOnImpact: 0
   fleshImpact: {fileID: 1096893136476370, guid: 24b82347924701148a13c746edfb6b22, type: 3}

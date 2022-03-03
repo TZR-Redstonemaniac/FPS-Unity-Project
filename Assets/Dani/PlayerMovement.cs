@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+    
+    ////////////////////////////////////////Public Variables////////////////////////////////////////
 
     [Header("Transforms")]
     [SerializeField] private Transform playerCam;
@@ -34,6 +36,8 @@ public class PlayerMovement : MonoBehaviour {
 
     [Header("Jumping")] 
     [SerializeField] private float jumpForce = 550f;
+    
+    ////////////////////////////////////////Private Variables////////////////////////////////////////
     
     //Jumping
     private float distToGround;
