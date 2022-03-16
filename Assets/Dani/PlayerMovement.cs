@@ -37,6 +37,9 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Jumping")] 
     [SerializeField] private float jumpForce = 550f;
     
+    [Header("Dashing")]
+    [SerializeField] private float dashSpeed;
+    
     ////////////////////////////////////////Private Variables////////////////////////////////////////
     
     //Jumping
@@ -70,6 +73,10 @@ public class PlayerMovement : MonoBehaviour {
     //Sliding
     private readonly Vector3 normalVector = Vector3.up;
     
+    //Dashing
+    private bool dashing;
+    private bool doCounterMovement = true;
+    
     public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, whatIsGround);
@@ -96,6 +103,7 @@ public class PlayerMovement : MonoBehaviour {
         Look();
         
         if (IsGrounded()) hasDoubleJump = true;
+        
         if (IsGrounded())
         {
             RaycastHit hit;
@@ -107,6 +115,7 @@ public class PlayerMovement : MonoBehaviour {
             }
             
         }
+        
         if (WallRun.isWallRunning) hasDoubleJump = true;
         
         if (IsGrounded() && Input.GetButtonDown("Jump"))
@@ -160,6 +169,10 @@ public class PlayerMovement : MonoBehaviour {
             StartCrouch();
         if (Input.GetButtonUp("Crouch"))
             StopCrouch();
+        
+        //Dashing
+        if (Input.GetButtonDown("Ability 3") && !dashing)
+            Dash();
     }
 
     private void StartCrouch() {
@@ -177,6 +190,31 @@ public class PlayerMovement : MonoBehaviour {
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
+    private void Dash()
+    {
+        float velocity = rb.velocity.magnitude;
+
+        rb.AddForce(orientation.transform.forward * y * dashSpeed * velocity, ForceMode.VelocityChange);
+        rb.AddForce(orientation.transform.right * x * dashSpeed * velocity, ForceMode.VelocityChange);
+
+        dashing = true;
+        doCounterMovement = false;
+        
+        Invoke(nameof(ReverseDash), 1f);
+        Invoke(nameof(ReverseCounterMovement), 2f);
+        
+    }
+
+    private void ReverseDash()
+    {
+        dashing = false;
+    }
+
+    private void ReverseCounterMovement()
+    {
+        doCounterMovement = true;
+    }
+    
     private void Movement() {
         //Extra gravity
         if(useGravity) rb.AddForce(Vector3.down * Time.deltaTime * 10);
@@ -185,8 +223,9 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 mag = FindVelRelativeToLook();
         float xMag = mag.x, yMag = mag.y;
 
-        //Counteract sliding and sloppy movement
-        CounterMovement(x, y, mag);
+        //Counteract sliding and sloppy movement if not dashing
+        if(doCounterMovement)
+            CounterMovement(x, y, mag);
 
         //Set max speed
         float speed = this.maxSpeed;
@@ -287,10 +326,12 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Counter movement
-        if (Math.Abs(mag.x) > threshold && Math.Abs(CounterX) < 0.05f || (mag.x < -threshold && CounterX > 0) || (mag.x > threshold && CounterX < 0)) {
+        if (Math.Abs(mag.x) > threshold && Math.Abs(CounterX) < 0.05f || (mag.x < -threshold && CounterX > 0) || 
+            (mag.x > threshold && CounterX < 0)) {
             rb.AddForce(moveSpeed * orientation.transform.right * Time.deltaTime * -mag.x * counterMovement);
         }
-        if (Math.Abs(mag.y) > threshold && Math.Abs(CounterY) < 0.05f || (mag.y < -threshold && CounterY > 0) || (mag.y > threshold && CounterY < 0)) {
+        if (Math.Abs(mag.y) > threshold && Math.Abs(CounterY) < 0.05f || (mag.y < -threshold && CounterY > 0) || 
+            (mag.y > threshold && CounterY < 0)) {
             rb.AddForce(moveSpeed * orientation.transform.forward * Time.deltaTime * -mag.y * counterMovement);
         }
         

@@ -52,14 +52,28 @@ public class BulletPhysics : MonoBehaviour
 
     private void Update()
     {
-        //When to explode
-        if(collisions > maxCollisions && doExplode)
-            Explode();
+        switch (collisions > maxCollisions)
+        {
+            //When to explode
+            case true when doExplode:
+                Explode();
+                break;
+            case true when !doExplode:
+                Destroy(gameObject);
+                break;
+        }
         
         //Count down lifetime
         maxLifetime -= Time.deltaTime;
-        if(maxLifetime <= 0 && doExplode)
-            Explode();
+        switch (maxLifetime <= 0)
+        {
+            case true when doExplode:
+                Explode();
+                break;
+            case true when !doExplode:
+                Destroy(gameObject);
+                break;
+        }
     }
 
     private void Explode()
@@ -73,7 +87,7 @@ public class BulletPhysics : MonoBehaviour
         foreach (var t in enemies)
         {
             //Get component of enemy and call TakeDamage
-            t.GetComponent<EnemyAi>().TakeDamage(explosionDamage);
+            t.GetComponent<BodyPart>().TakeDamage(explosionDamage);
         }
         
         //Check for other objects
@@ -106,14 +120,14 @@ public class BulletPhysics : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         //Count up collisions
-        collisions++;
+        collisions += 1;
         
         //Explode if bullet hits an enemy directly and explodeOnImpact is true
         if(other.collider.CompareTag("Enemy") && explodeOnImpact && doExplode)
             Explode();
         
         if(other.collider.CompareTag("Enemy") && !doExplode)
-            other.gameObject.GetComponent<EnemyAi>().TakeDamage(damage);
+            other.gameObject.GetComponent<BodyPart>().TakeDamage(damage);
         
         //Create particle effect on collision
         switch (other.collider.tag)
