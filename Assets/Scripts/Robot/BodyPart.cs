@@ -13,7 +13,7 @@ public class BodyPart : MonoBehaviour
 
 
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         life.TakeDamage(damage);
     }

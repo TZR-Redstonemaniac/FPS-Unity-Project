@@ -23,6 +23,7 @@ public class RobotLife : MonoBehaviour
         ragdollRigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
         ragdollColliders = gameObject.GetComponentsInChildren<Collider>();
         gameObject.GetComponent<CapsuleCollider>().enabled = true;
+        gameObject.GetComponent<RobotMovement>().enabled = true;
         DisableRagdoll();
     }
 
@@ -33,18 +34,19 @@ public class RobotLife : MonoBehaviour
             Die();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
     }
 
     void Die()
     {
-        EnableRagdoll();
+        gameObject.GetComponent<RobotMovement>().enabled = false;
         gameObject.GetComponent<ThirdPersonCharacter>().enabled = false;
         gameObject.GetComponent<Animator>().enabled = false;
         gameObject.GetComponent<NavMeshAgent>().enabled = false;
         gameObject.GetComponent<RigBuilder>().enabled = false;
+        EnableRagdoll();
     }
 
     void DisableRagdoll()

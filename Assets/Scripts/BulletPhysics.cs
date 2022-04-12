@@ -121,12 +121,12 @@ public class BulletPhysics : MonoBehaviour
     {
         //Count up collisions
         collisions += 1;
-        
+
         //Explode if bullet hits an enemy directly and explodeOnImpact is true
         if(other.collider.CompareTag("Enemy") && explodeOnImpact && doExplode)
             Explode();
         
-        if(other.collider.CompareTag("Enemy") && !doExplode)
+        if(other.collider.CompareTag("Enemy"))
             other.gameObject.GetComponent<BodyPart>().TakeDamage(damage);
         
         //Create particle effect on collision
@@ -163,7 +163,7 @@ public class BulletPhysics : MonoBehaviour
         };
 
         //Assign material
-        GetComponent<MeshCollider>().material = physicMaterial;
+        GetComponent<Collider>().material = physicMaterial;
         
         //Set Gravity
         rb.useGravity = useGravity;
