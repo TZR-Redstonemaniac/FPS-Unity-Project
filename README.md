@@ -1,3 +1,3 @@
 # Unity-Project
 
-FPS Parkour Puzzle game.
+This is my Fist Person Shooter/Parkour/Puzzle game that I am developing.
