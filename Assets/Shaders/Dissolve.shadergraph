@@ -1839,14 +1839,14 @@
     },
     "m_Name": "Dissolve Amount",
     "m_DefaultReferenceName": "Vector1_ca5da6a28d8248dbbcd9b64d3ed79ba7",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_Dissolve",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": 0.0,
-    "m_FloatType": 1,
+    "m_FloatType": 0,
     "m_RangeValues": {
         "x": -1.0,
         "y": 1.0

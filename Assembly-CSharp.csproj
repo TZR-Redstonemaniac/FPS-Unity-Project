@@ -238,6 +238,8 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
      <Compile Include="Assets\Scripts\TimeManager.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
+     <Compile Include="Assets\dissolveTest.cs" />
+     <Compile Include="Assets\Minimap.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

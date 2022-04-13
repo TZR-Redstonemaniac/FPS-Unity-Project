@@ -10,12 +10,18 @@ public class RobotLife : MonoBehaviour
 
     ////////////////////////////////////////Public Variables////////////////////////////////////////
 
+    [SerializeField] private Material deathMat;
     [SerializeField] private float health;
+    [SerializeField] private float deathSpeed;
+    [SerializeField] private float deathDelay;
+    [SerializeField] private float deathLunge;
+    [SerializeField] private Renderer[] renderers;
 
     ////////////////////////////////////////Private Variables////////////////////////////////////////
 
     private Rigidbody[] ragdollRigidbodies;
     private Collider[] ragdollColliders;
+    private float dissolveAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +30,7 @@ public class RobotLife : MonoBehaviour
         ragdollColliders = gameObject.GetComponentsInChildren<Collider>();
         gameObject.GetComponent<CapsuleCollider>().enabled = true;
         gameObject.GetComponent<RobotMovement>().enabled = true;
+        dissolveAmount = -1;
         DisableRagdoll();
     }
 
@@ -32,6 +39,9 @@ public class RobotLife : MonoBehaviour
     {
         if (health <= 0)
             Die();
+        
+        dissolveAmount = Mathf.Clamp(dissolveAmount, -1, 1);
+        deathMat.SetFloat("_Dissolve", dissolveAmount);
     }
 
     public void TakeDamage(float damage)
@@ -47,6 +57,25 @@ public class RobotLife : MonoBehaviour
         gameObject.GetComponent<NavMeshAgent>().enabled = false;
         gameObject.GetComponent<RigBuilder>().enabled = false;
         EnableRagdoll();
+        Invoke(nameof(EnableMat), deathDelay);
+    }
+
+    void EnableMat()
+    {
+        foreach (Renderer r in renderers)
+        {
+            r.material = deathMat;
+        }
+        dissolveAmount += deathSpeed * Time.deltaTime;
+        
+        if(dissolveAmount >= 1)
+            Invoke(nameof(RestoreMat), 2);
+    }
+
+    void RestoreMat()
+    {
+        dissolveAmount = -1;
+        Destroy(transform.parent.gameObject);
     }
 
     void DisableRagdoll()
@@ -72,6 +101,11 @@ public class RobotLife : MonoBehaviour
         foreach (Collider collider in ragdollColliders)
         {
             collider.enabled = true;
+        }
+
+        foreach (Rigidbody rb in ragdollRigidbodies)
+        {
+            rb.AddRelativeForce(Vector3.up * deathLunge, ForceMode.VelocityChange);
         }
     }
 }

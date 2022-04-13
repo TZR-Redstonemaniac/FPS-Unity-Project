@@ -2059,6 +2059,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1502762833}
   - component: {fileID: 1502762832}
+  - component: {fileID: 1502762834}
   m_Layer: 0
   m_Name: AI Dissolve
   m_TagString: Untagged
@@ -2101,6 +2102,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1502762834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502762831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3edf68de213c3a4899a34dfcb464f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: f6855ec52d0f9ee4db2600f2bdd0927c, type: 2}
+  dead: 0
+  dissolveSpeed: 1
+  DissolveAmount: -1
 --- !u!1 &1531529190
 GameObject:
   m_ObjectHideFlags: 0

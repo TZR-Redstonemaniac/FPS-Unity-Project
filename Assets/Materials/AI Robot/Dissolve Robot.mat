@@ -105,7 +105,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_ace8dd8174a143c0888e7ee0fc9875c5: 0.05
-    - Vector1_ca5da6a28d8248dbbcd9b64d3ed79ba7: 1
+    - Vector1_ca5da6a28d8248dbbcd9b64d3ed79ba7: -1
     - Vector1_d51a65a3e4724aada7c58d367ea2643f: 100
     - _AlphaClip: 0
     - _Blend: 0
@@ -117,6 +117,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DisplaceAmount: 1.5
+    - _Dissolve: -1
     - _DstBlend: 0
     - _EdgeSize: 0.2
     - _EnvironmentReflections: 1
