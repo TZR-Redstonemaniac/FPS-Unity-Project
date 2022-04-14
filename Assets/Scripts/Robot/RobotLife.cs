@@ -28,7 +28,7 @@ public class RobotLife : MonoBehaviour
     {
         ragdollRigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
         ragdollColliders = gameObject.GetComponentsInChildren<Collider>();
-        gameObject.GetComponent<CapsuleCollider>().enabled = true;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
         gameObject.GetComponent<RobotMovement>().enabled = true;
         dissolveAmount = -1;
         DisableRagdoll();
@@ -75,7 +75,7 @@ public class RobotLife : MonoBehaviour
     void RestoreMat()
     {
         dissolveAmount = -1;
-        Destroy(transform.parent.gameObject);
+        Destroy(transform.gameObject);
     }
 
     void DisableRagdoll()

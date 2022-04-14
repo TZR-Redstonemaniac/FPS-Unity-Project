@@ -197,6 +197,8 @@
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIControl.cs" />
      <Compile Include="Assets\Rewired\Examples\PlayerMouseSprite\Scripts\PlayerMouseSpriteExample.cs" />
      <Compile Include="Assets\Scripts\Wall run personal\PersonalWallRun.cs" />
+     <Compile Include="Assets\dissolveTest.cs" />
+     <Compile Include="Assets\Scripts\Minimap.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
      <Compile Include="Assets\Scripts\Wall run personal\WallRunningScript.cs" />
@@ -238,8 +240,7 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
      <Compile Include="Assets\Scripts\TimeManager.cs" />
      <Compile Include="Assets\Rewired\Extras\ControlMapper\Scripts\UIGroup.cs" />
-     <Compile Include="Assets\dissolveTest.cs" />
-     <Compile Include="Assets\Minimap.cs" />
+     <Compile Include="Assets\MinimapFollow.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\LeanTween\ReadMe.txt" />

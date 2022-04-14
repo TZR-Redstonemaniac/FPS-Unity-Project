@@ -10,8 +10,10 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float delay = 3f;
     [SerializeField] private float radius = 5f;
     [SerializeField] private float explosionForce = 700f;
+    [SerializeField] private float damage = 100f;
 
     [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private LayerMask enemy;
 
     private TimeManager timeManager;
     private GameObject timeManagerGameObject;
@@ -67,6 +69,16 @@ public class Grenade : MonoBehaviour
             
             if(rb != null)
                 rb.AddExplosionForce(explosionForce, transform.position, radius);
+        }
+
+        Collider[] enemyColliders = Physics.OverlapSphere(transform.position, radius, enemy);
+
+        foreach (Collider collider in enemyColliders)
+        {
+            BodyPart bodyPart = collider.gameObject.GetComponent<BodyPart>();
+            
+            if(bodyPart != null)
+                bodyPart.TakeDamage(damage);
         }
 
         //Add camera shake

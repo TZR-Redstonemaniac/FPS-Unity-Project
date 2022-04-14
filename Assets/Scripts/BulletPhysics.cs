@@ -52,7 +52,7 @@ public class BulletPhysics : MonoBehaviour
 
     private void Update()
     {
-        switch (collisions > maxCollisions)
+        switch (collisions >= maxCollisions)
         {
             //When to explode
             case true when doExplode:
@@ -123,14 +123,17 @@ public class BulletPhysics : MonoBehaviour
         collisions += 1;
 
         //Explode if bullet hits an enemy directly and explodeOnImpact is true
-        if(other.collider.CompareTag("Enemy") && explodeOnImpact && doExplode)
+        if(other.collider.gameObject.layer ==  LayerMask.NameToLayer("Enemy") && explodeOnImpact && doExplode)
             Explode();
-        
-        if(other.collider.CompareTag("Enemy"))
-            other.gameObject.GetComponent<BodyPart>().TakeDamage(damage);
+
+        if (other.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if(other.collider.gameObject.GetComponent<BodyPart>() != null)
+                other.collider.gameObject.GetComponent<BodyPart>().TakeDamage(damage);
+        }
         
         //Create particle effect on collision
-        switch (other.collider.tag)
+        switch (other.gameObject.tag)
         {
             case "Flesh":
                 Instantiate(fleshImpact, transform.position, transform.rotation);
