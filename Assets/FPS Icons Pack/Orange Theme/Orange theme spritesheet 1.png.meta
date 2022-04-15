@@ -105,6 +105,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -748,6 +749,34 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      OT Bullet 4: 21300006
+      OT Handgrenade 5: 21300030
+      OT Handgrenade 7: 21300034
+      OT Explosive: 21300046
+      OT Handgrenade 6: 21300032
+      OT Handgrenade 8: 21300036
+      OT Bullet 1: 21300000
+      OT Tank 1: 21300024
+      OT Bullet 5: 21300008
+      OT Bullet 6: 21300010
+      OT Tank 2: 21300040
+      OT Bullet 10: 21300018
+      OT Handgrenade 9: 21300038
+      OT Handgrenade 2: 21300022
+      OT Bullet 8: 21300014
+      OT Bullet 3: 21300004
+      OT Jet 2: 21300044
+      OT Handgrenade 1: 21300020
+      OT Health: 21300052
+      OT Bullet 2: 21300002
+      OT Bullet 7: 21300012
+      OT Handgrenade 4: 21300028
+      OT Bullet 9: 21300016
+      OT Healthpack: 21300050
+      OT Handgrenade 3: 21300026
+      OT Jet 1: 21300042
+      OT Explosive remote: 21300048
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

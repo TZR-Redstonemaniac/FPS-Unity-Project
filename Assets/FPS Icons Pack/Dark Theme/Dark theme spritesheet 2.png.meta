@@ -96,6 +96,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -676,6 +677,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      DT Combat knife: 21300038
+      DT Automatic rifle 4: 21300046
+      DT Handgun 3: 21300014
+      DT Submachinegun 1: 21300024
+      DT Sniper 3: 21300020
+      DT Automatic rifle 1: 21300002
+      DT Rocketlauncher 1: 21300032
+      DT Automatic rifle 3: 21300044
+      DT Sniper 1: 21300036
+      DT Automatic rifle 2: 21300018
+      DT Automatic rifle 5: 21300006
+      DT Shotgun 2: 21300012
+      DT Sniper 2: 21300034
+      DT Submachinegun 2: 21300042
+      DT Handgun 4: 21300010
+      DT Handgun 2: 21300022
+      DT Automatic shotgun 1: 21300040
+      DT Semiautomatic rifle 1: 21300008
+      DT Handgun 1: 21300028
+      DT Submachinegun 3: 21300016
+      DT Rifle 1: 21300030
+      DT Shotgun 1: 21300026
+      DT Automatic rifle 6: 21300000
+      DT Handgun 5: 21300004
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -96,6 +96,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -676,6 +677,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      LT Sniper 1: 21300036
+      LT Handgun 3: 21300014
+      LT Handgun 4: 21300010
+      LT Rifle 1: 21300030
+      LT Rocketlauncher 1: 21300032
+      LT Automatic rifle 2: 21300018
+      LT Automatic shotgun 1: 21300040
+      LT Semiautomatic rifle 1: 21300008
+      LT Handgun 5: 21300004
+      LT Submachinegun 3: 21300016
+      LT Automatic rifle 1: 21300002
+      LT Handgun 2: 21300022
+      LT Sniper 3: 21300020
+      LT Submachinegun 2: 21300042
+      LT Shotgun 2: 21300012
+      LT Shotgun 1: 21300026
+      LT Automatic rifle 5: 21300006
+      LT Sniper 2: 21300034
+      LT Handgun 1: 21300028
+      LT Automatic rifle 4: 21300046
+      LT Combat knife: 21300038
+      LT Submachinegun 1: 21300024
+      LT Automatic rifle 6: 21300000
+      LT Automatic rifle 3: 21300044
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

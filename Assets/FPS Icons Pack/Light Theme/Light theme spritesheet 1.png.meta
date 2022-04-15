@@ -105,6 +105,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -748,6 +749,34 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      LT Handgrenade 4: 21300028
+      LT Handgrenade 2: 21300022
+      LT Bullet 2: 21300002
+      LT Bullet 8: 21300014
+      LT Tank 1: 21300024
+      LT Handgrenade 9: 21300038
+      LT Healthpack: 21300050
+      LT Handgrenade 1: 21300020
+      LT Handgrenade 3: 21300026
+      LT Health: 21300052
+      LT Bullet 4: 21300006
+      LT Bullet 1: 21300000
+      LT Handgrenade 8: 21300036
+      LT Bullet 7: 21300012
+      LT Tank 2: 21300040
+      LT Bullet 10: 21300018
+      LT Jet 2: 21300044
+      LT Bullet 3: 21300004
+      LT Jet 1: 21300042
+      LT Explosive: 21300046
+      LT Bullet 5: 21300008
+      LT Explosive remote: 21300048
+      LT Bullet 9: 21300016
+      LT Handgrenade 7: 21300034
+      LT Handgrenade 5: 21300030
+      LT Bullet 6: 21300010
+      LT Handgrenade 6: 21300032
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

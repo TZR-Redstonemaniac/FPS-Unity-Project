@@ -96,6 +96,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -676,6 +677,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      OT Handgun 1: 21300028
+      OT Handgun 2: 21300022
+      OT Handgun 3: 21300014
+      OT Submachinegun 1: 21300024
+      OT Rocketlauncher 1: 21300032
+      OT Sniper 1: 21300036
+      OT Combat knife: 21300038
+      OT Rifle 1: 21300030
+      OT Submachinegun 2: 21300042
+      OT Sniper 3: 21300020
+      OT Automatic rifle 2: 21300018
+      OT Automatic rifle 1: 21300002
+      OT Automatic rifle 6: 21300000
+      OT Shotgun 1: 21300026
+      OT Automatic rifle 5: 21300006
+      OT Submachinegun 3: 21300016
+      OT Automatic shotgun 1: 21300040
+      OT Sniper 2: 21300034
+      OT Automatic rifle 4: 21300046
+      OT Semiautomatic rifle 1: 21300008
+      OT Automatic rifle 3: 21300044
+      OT Handgun 5: 21300004
+      OT Handgun 4: 21300010
+      OT Shotgun 2: 21300012
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

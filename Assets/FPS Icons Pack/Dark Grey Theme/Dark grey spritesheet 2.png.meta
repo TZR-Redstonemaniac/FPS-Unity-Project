@@ -96,6 +96,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -676,6 +677,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      DGT Automatic rifle 4: 21300046
+      DGT Handgun 4: 21300010
+      DGT Semiautomatic rifle 1: 21300008
+      DGT Handgun 3: 21300014
+      DGT Combat knife: 21300038
+      DGT Submachinegun 1: 21300024
+      DGT Sniper 1: 21300036
+      DGT Handgun 2: 21300022
+      DGT Automatic rifle 5: 21300006
+      DGT Automatic rifle 3: 21300044
+      DGT Automatic shotgun 1: 21300040
+      DGT Shotgun 2: 21300012
+      DGT Submachinegun 3: 21300016
+      DGT Rocketlauncher 1: 21300032
+      DGT Automatic rifle 6: 21300000
+      DGT Handgun 1: 21300028
+      DGT Sniper 2: 21300034
+      DGT Rifle 1: 21300030
+      DGT Automatic rifle 2: 21300018
+      DGT Handgun 5: 21300004
+      DGT Submachinegun 2: 21300042
+      DGT Automatic rifle 1: 21300002
+      DGT Sniper 3: 21300020
+      DGT Shotgun 1: 21300026
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
