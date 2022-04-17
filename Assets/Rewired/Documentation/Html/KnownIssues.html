@@ -137,7 +137,7 @@
     	<div class="main-body">
 	        <div class="logo"><a href="http://guavaman.com/projects/rewired" title="Rewired"><img src="files/images/rewired-logo.png" width="173" height="139" alt="Rewired" /></a></div>
                      
-          <h1>
+            <h1>
             <!-- InstanceBeginEditable name="PageHeader" -->Known Issues
       <!-- InstanceEndEditable -->
             </h1>
@@ -147,7 +147,7 @@
     <p><strong>Topics:</strong></p>
     <h3><a href="#general">General</a></h3>
     <ul>
-      <li><a href="#not-compatible-unity-new-input-system">Rewired is not compatible with Unity's &quot;new&quot; input system</a></li>
+      <li><a href="#not-compatible-unity-new-input-system">Compatibility with Unity's &quot;new&quot; input system</a></li>
       <li><a href="#windows-standalone-il2cpp-vs2019-hang">All platforms compiled with IL2CPP on Windows: Builds never finish, build fails with errors, builds crash, built exe hangs at launch, or builds throw exceptions about duplicate Actions</a></li>
       <li><a href="#running-in-a-sandbox">Running in a Sandbox</a></li>
     </ul>
@@ -175,6 +175,7 @@
       <li><a href="#windows-ri-hid-error">Windows Editor: &lt;RI.Hid&gt; Failed to create device file: 2 The system cannot find the file specified.</a></li>
       <li><a href="#windows-stuck-button-right-click-window-title-bar">Windows Standalone: Keyboard and mouse keys get stuck on when holding a key, right-clicking on the window's title bar, and then releasing the key</a></li>
       <li><a href="#windows-app-store-u5">Windows App Store support not working in Unity 5.0.0, fixed in 5.0.1</a></li>
+      <li><a href="#windows-high-refresh-rate-mouse-slowdown">Windows Standalone: High refresh rate mouse causes slowdown and profiler spikes</a></li>
       </ul>
     <h3><a href="#uwp">Windows 10 Universal (UWP):</a></h3>
     <ul>
@@ -244,13 +245,18 @@
 <hr />
 <p>&nbsp;</p>
 <h2><a name="general" id="general"></a>General:</h2>
-<h3><a name="not-compatible-unity-new-input-system" id="not-compatible-unity-new-input-system"></a>Rewired is not compatible with Unity's &quot;new&quot; input system</h3>
-<p>Unity has introduced a new input system which changes the way Unity handles input. Rewired is not compatible with Unity's new input system. If you enable the new input system by setting this value to &quot;Input System&quot; or &quot;Both&quot;, Rewired and/or Unity's input system may not function at all or parts of each system may not function correctly. While some platforms may work, others may not.</p>
+<h3><a name="not-compatible-unity-new-input-system" id="not-compatible-unity-new-input-system"></a>Compatibility with Unity's &quot;new&quot; input system</h3>
+<p><strong>Update:</strong> As of Unity 2021.2.0f1, Rewired can now work alongside Unity's new input system on Windows. If you need to use both Rewired and Unity's new input system simultaneously, update to Unity 2021.2.0f1+. To use both together, use the following setting:</p>
+<p>Player Settings -&gt; Active Input Handling -&gt; Both</p>
+<p>Note: The only platform with known issues running both systems together was Windows Standalone. If other incompatibilites exist on other platforms, they are currently unknown and untested.</p>
+<p><strong>For versions prior to 2021.2.0f1:</strong></p>
+<p>Rewired is not compatible with Unity's new input system. If you enable the new input system by setting this value to &quot;Input System&quot; or &quot;Both&quot;, Rewired and/or Unity's input system may not function at all or parts of each system may not function correctly. While some platforms may work, others may not.</p>
 <p>The only setting supported by Rewired is:<br />
   Player Settings -&gt; Active Input Handling -&gt; Input Manager</p>
 <p>&nbsp;</p>
 <hr />
 <h3><a name="windows-standalone-il2cpp-vs2019-hang" id="windows-standalone-il2cpp-vs2019-hang"></a>All platforms compiled with IL2CPP on Windows: Builds never finish, build fails with errors, builds crash, built exe hangs at launch, or builds throw exceptions about duplicate Actions</h3>
+<p><strong>Update: This issue no longer affects Rewired 1.1.40.0+. Update to the latest version of Rewired.</strong></p>
 <p>The latest version at the time of writing this, Visual Studio 2019 16.8.6, still exhibits this error.</p>
 <p>Due to a new compiler bug in Visual Studio 2019 16.5+, when built with IL2CPP using the Unity Editor on Windows with Visual Studio 2019 installed, the build may never finish (hang during compile), crash during compile, the built executable may hang after launch, or they may throw exceptions about duplicate Actions, or potentially unlimited other possible manifestations. This issue can be avoided by uninstalling Visual Studio 2019 and installing Visual Studio 2017, or you can use one of the following workarounds to make builds work again in VS 2019.</p>
 <p><strong>Update: </strong>This has been updated to disable just the jump threading   optimizer instead of the entire SSA optimizer based on feedback from   Microsoft.</p>
@@ -512,6 +518,15 @@ On Windows, another easier way to disable the optimizer is to add an   environme
 <hr />
 <h3><a name="windows-app-store-u5" id="windows-app-store-u5"></a>Windows App Store support not working in Unity 5.0.0, fixed in 5.0.1</h3>
 <p>Due to a new bug introduced in Unity 5.0.0, Rewired is unable to be compiled in this version of Unity. The bug was fixed in Unity 5.0.1, so upgrade to 5.0.1 if you need Windows App Store support.</p>
+<p>&nbsp;</p>
+<hr />
+<h3><a name="windows-high-refresh-rate-mouse-slowdown" id="windows-high-refresh-rate-mouse-slowdown"></a>Windows Standalone: High refresh rate mouse causes slowdown and profiler spikes</h3>
+<p><strong>Update:</strong> This issue has been fixed by Unity in 2021.2.0f1. Also, a corresponding change had to be made to Rewired due to their new changes to fix this issue, so you must use Rewired 1.1.41.0+ in conjunction with Unity 2021.2.0f1+ to support high refresh rate mice.</p>
+<p>A high refresh rate mouse causes slowdowns, high cpu usage, and profiler spikes in Unity. This is not a Rewired issue. It is 100% a Unity issue and cannot be fixed by Rewired.</p>
+<p>It has been reported to me numerous times that Rewired is causing high CPU usage causing spikes in the profiler when moving the mouse. The profiler will report a particular function in Rewired_Windows.dll is using many milliseconds of time. This is a false flag. The problem is in Unity, not Rewired.</p>
+<p> The only reason Rewired is even shown in this stack trace is because of   how the Raw Input mouse event rerouting works. An application may only   receive Raw Input events for a particular device type to one single   window. Unity requires these events for their mouse input to work.   Rewired also needs to receive these events for its Raw Input mouse to   work. Rewired creates a message window, subscribes to Raw Input events   to this window, then it reroutes the Raw Input mouse events back to   Unity when they come in. What happens after that is out of Rewired's   control. Unity becomes downstream of Rewired and therefore Rewired ends   up in the stack trace.</p>
+<p>This is easily proven by performing the same test in a fresh project without Rewired installed. You will see the exact same spikes in the profiler without Rewired anywhere in the mix.</p>
+<p>Mice with a 1000+ Hz refresh rate seem to cause the most problems. The higher the rate, the more slowdown.</p>
 <p>&nbsp;</p>
 <hr />
 <p>&nbsp;</p>
@@ -989,7 +1004,7 @@ public class RewiredCustomController_AndroidRemote : MonoBehaviour {
         
     </div>
   <div class="footer clearfix">
-   	<p class="left">Copyright &copy;2014-2019 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
+   	<p class="left">Copyright &copy;2014-2021 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
   	<p class="right"><a href="http://guavaman.com/projects/rewired" title="Return to Rewired Website">Return to Rewired Website</a></p>
   </div>
   <!-- end .content --></div>

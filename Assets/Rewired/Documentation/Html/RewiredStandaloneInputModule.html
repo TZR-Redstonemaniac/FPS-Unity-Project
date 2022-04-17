@@ -161,6 +161,10 @@
 <p>This is an EventSystem input module component that can be used in place of Unity's StandaloneInputModule. The purpose of this module is to allow Rewired to control navigation of Unity's UI instead of the default UnityEngine.Input.</p>
     <p>When you install or upgrade Rewired, it will automatically install the RewiredStandaloneInputModule.cs file in the Rewired/Integration/UnityUI folder provided you are running Unity 4.6 or greater.</p>
     <p>This component must be added to the Event System in the scene and the default StandaloneInputModule must be disabled or removed. This will allow the UnityUI system to receive input from Rewired. You must also create the appropriate Actions in the Rewired Editor to match the Actions listed in the RewiredStandaloneInputModule and assign these Actions to one or more Controller Maps then assign those to one or more Players.</p>
+    <p><strong>IMPORTANT:</strong></p>
+    <p>The Rewired Standalone Input Module is not a re-invention of Unity's UI system. It is not a new UI system, it does not  attempt to solve issues with Unity UI's design, it does not attempt to add a bunch of new features to Unity UI. It is a simple bridge between Unity UI and Rewired. It does not change how Unity UI works and it has no control over the vast majority of Unity UI functionality which is handled in the UI element components themselves. Once the input is received from Rewired and input events are sent out to the Event System, what happens after that is out of Rewired's responsibility or knowledge.</p>
+    <p> The Rewired Standalone Input Module does nothing besides control input in Unity's UI system by changing the underlying input source from UnityEngine.Input to Rewired. If you are having difficulties with controlling the UI, please make sure your problems aren't really  pertaining to usage of Unity's UI system before contacting support. I frequently get questions that are actually issues with Unity UI setup and have nothing to do with Rewired. When in doubt, test with the StandaloneInputModule instead of the RewiredStandaloneInputModule. If the problem persists, you know that the issue is not with Rewired but rather something you've missed when setting up Unity UI. </p>
+<p>Please refer to the <a href="https://docs.unity3d.com/Manual/com.unity.ugui.html">Unity UI documentation</a> and <a href="http://docs.unity3d.com/Manual/script-StandaloneInputModule.html">Unity documentation on the StandaloneInputModule</a> for basic usage.</p>
     <p>&nbsp;</p>
     <hr />
     <h3><a name="quick-setup" id="quick-setup"></a>Quick Setup</h3>
@@ -292,6 +296,10 @@
         <td>Deselects the current selection on mouse/touch click when the pointer is not over a selectable object.</td>
       </tr>
       <tr>
+        <td>Deselect Before Selecting</td>
+        <td>Deselects the current selection on mouse/touch click before selecting the next object.</td>
+      </tr>
+      <tr>
         <td>Force Module Active</td>
         <td>Forces the module to always be active.</td>
       </tr>
@@ -348,7 +356,7 @@
     <ul>
       <li>The Rewired Standalone Input Module does nothing besides control input in Unity's UI system by changing the underlying input source from UnityEngine.Input to Rewired. If you are having difficulties with controlling the UI, please make sure your problems aren't really  pertaining to usage of Unity's UI system before contacting support. I frequently get questions that are actually issues with Unity UI setup and have nothing to do with Rewired. When in doubt, test with the StandaloneInputModule instead of the RewiredStandaloneInputModule. If the problem persists, you know that the issue is not with Rewired but rather something you've missed when setting up Unity UI. </li>
       </ul>
-    <p>Please refer to the <a href="http://docs.unity3d.com/Manual/script-StandaloneInputModule.html">Unity documentation on the StandaloneInputModule</a> for basic usage.</p>
+    <p>Please refer to the <a href="https://docs.unity3d.com/Manual/com.unity.ugui.html">Unity UI documentation</a> and <a href="http://docs.unity3d.com/Manual/script-StandaloneInputModule.html">Unity documentation on the StandaloneInputModule</a> for basic usage.</p>
 <p><strong>Problem: Receiving duplicate mouse clicks when clicking on a UI button</strong></p>
     <p>Do not assign UI Submit or Cancel Actions to Mouse Left Button or Mouse Right Button or you will receive double-clicks evey time the mouse button is pressed over a button. The mouse button click on a UI element is based on mouse cursor position and does not use the Action system.</p>
 <p></p>
@@ -393,7 +401,7 @@ void SetSelected(GameObject selectableObject) {
         
     </div>
   <div class="footer clearfix">
-   	<p class="left">Copyright &copy;2014-2019 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
+   	<p class="left">Copyright &copy;2014-2021 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
   	<p class="right"><a href="http://guavaman.com/projects/rewired" title="Return to Rewired Website">Return to Rewired Website</a></p>
   </div>
   <!-- end .content --></div>

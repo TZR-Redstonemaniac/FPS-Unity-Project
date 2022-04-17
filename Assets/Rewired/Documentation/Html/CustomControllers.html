@@ -160,16 +160,21 @@
 <p>2) Set callbacks in the CustomController with <a href="http://guavaman.com/projects/rewired/docs/api-reference/html/M_Rewired_CustomController_SetAxisUpdateCallback.htm">CustomController.SetAxisUpdateCallback</a> and <a href="http://guavaman.com/projects/rewired/docs/api-reference/html/M_Rewired_CustomController_SetButtonUpdateCallback.htm">SetButtonUpdateCallback</a>. These callback functions will be called during the input update step and you can push the latest values into the element at this time.</p>
 <p>Examples of both methods can be seen in the Touch Controller example in the Rewired/Examples folder.</p>
 <p>Note: Both the <a href="http://guavaman.com/projects/rewired/docs/api-reference/html/E_Rewired_ReInput_InputSourceUpdateEvent.htm">InputSourceUpdateEvent</a> and the callbacks may be called more than once per frame. They will be called each time input is updated, which is dependent on the Update Loop setting in the Input Manager. If you're updating input in multiple loops, for example Update and FixedUpdate, the event and the callbacks will be called once for each update loop.</p>
-    <div class="bottom-pager clearfix">
-	    <a class="back-button" href="ControllerTemplates.html" title="Layouts"><span class="button-img"></span>Controller Templates</a>
-    	<a class="forward-button" href="HowTos.html" title="How To's"><span class="button-img"></span>How To's</a>
-	</div>
+<p><strong>Examples</strong></p>
+<ul>
+  <li><a href="Examples.html#custom-controllers-touch">Custom Controllers Touch</a></li>
+  <li><a href="Examples.html#custom-controllers-tilt">Custom Controllers Tilt</a></li>
+</ul>
+<div class="bottom-pager clearfix">
+  <a class="back-button" href="ControllerTemplates.html" title="Layouts"><span class="button-img"></span>Controller Templates</a>
+  <a class="forward-button" href="HowTos.html" title="How To's"><span class="button-img"></span>How To's</a>
+</div>
 <!-- InstanceEndEditable -->
         </div>
         
     </div>
   <div class="footer clearfix">
-   	<p class="left">Copyright &copy;2014-2019 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
+   	<p class="left">Copyright &copy;2014-2021 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
   	<p class="right"><a href="http://guavaman.com/projects/rewired" title="Return to Rewired Website">Return to Rewired Website</a></p>
   </div>
   <!-- end .content --></div>

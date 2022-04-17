@@ -320,6 +320,16 @@ mouse.middleButton.actionName = middleButtonAction;
 <p>If you have special needs that require you be able to move a single Player Mouse using both Absolute and Relative axis values, you should set up the axes in Relative mode and feed those values in as Actions, and for the Absolute values, feed them in directly into the Screen Position property using a script.</p>
 <p style="background-color: #ffff00"><strong><a name="player-mouse-additional-info" id="player-mouse-additional-info"></a>Additional Info</strong></p>
 <p>The PlayerMouse Component is a wrapper class for the <a href="https://guavaman.com/projects/rewired/docs/api-reference/html/T_Rewired_PlayerMouse.htm">PlayerMouse</a> class and exists in the <a href="https://guavaman.com/projects/rewired/docs/api-reference/html/N_Rewired_Components.htm">Rewired.Components</a> namespace. If you create a PlayerMouse by adding a Component on a GameObject, you can access it from scripts by calling GetComponent&lt;<a href="https://guavaman.com/projects/rewired/docs/api-reference/html/T_Rewired_Components_PlayerMouse.htm">Rewired.Components.PlayerMouse</a>&gt;(). You cannot use GetComponent with the non-Monobehaviour derived class PlayerMouse.</p>
+<p><strong>FAQ:</strong></p>
+<p><strong>Q: Why does the software cursor lag behind the OS cursor?</strong></p>
+<div></div>
+<p>You are simply seeing the difference between hardware cursor rendering and software cursor rendering:<br />
+  <a href="https://stackoverflow.com/questions/48833250/why-is-the-mouse-cursor-drawn-faster-than-applications">  https://stackoverflow.com/questions/48833250/why-is-the-mouse-cursor-drawn-faster-than-applications</a></p>
+<p>There is a reason they use hardware cursor rendering on operating systems -- it's faster and not prone to lag. It won't slow down when the application slows down either.</p>
+<p>There is no way possible to make a software cursor perform identically to a hardware cursor. This is simply the nature of software cursors vs hardware.</p>
+<p>Other posts on the topic:<br />
+  <a href="https://www.reddit.com/r/witcher/comments/3cwwfm/what_does_the_hardware_cursor_option_on_pc_do/">  https://www.reddit.com/r/witcher/comments/3cwwfm/what_does_the_hardware_cursor_option_on_pc_do/</a></p>
+<p>----------------</p>
 <p><strong>Examples</strong></p>
 <ul>
   <li><a href="Examples.html#player-mouse-sprite">Player Mouse Sprite</a></li>
@@ -416,7 +426,7 @@ mouse.middleButton.actionName = middleButtonAction;
         
     </div>
   <div class="footer clearfix">
-   	<p class="left">Copyright &copy;2014-2019 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
+   	<p class="left">Copyright &copy;2014-2021 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
   	<p class="right"><a href="http://guavaman.com/projects/rewired" title="Return to Rewired Website">Return to Rewired Website</a></p>
   </div>
   <!-- end .content --></div>

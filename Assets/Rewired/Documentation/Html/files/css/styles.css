@@ -258,6 +258,10 @@ a.forward-button .button-img {
   font-size: 80%;
 }
 
+table.supported-controllers-table td {
+	padding: 0px;
+}
+
 .yes,
 .native,
 .semi-native {
