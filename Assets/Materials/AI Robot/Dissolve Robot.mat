@@ -122,7 +122,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DisplaceAmount: 1.5
-    - _Dissolve: 1
+    - _Dissolve: -1
     - _DstBlend: 0
     - _EdgeSize: 0.2
     - _EnvironmentReflections: 1
