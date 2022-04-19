@@ -46,7 +46,15 @@ public class PersonalWallRun : MonoBehaviour
 
     private Vector3 lastWallNormal;
     private Vector3 currentWallNormal;
-    
+
+    private void Start()
+    {
+        foreach (Collider c in gameObject.transform.parent.GetComponentsInChildren<Collider>())
+        {
+            ignoreCollider.Append(c);
+        }
+    }
+
     private void LateUpdate()
     {
         RaycastHit leftHit;

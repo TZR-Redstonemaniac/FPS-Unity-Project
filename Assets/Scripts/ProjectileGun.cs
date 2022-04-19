@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -53,6 +54,19 @@ public class ProjectileGun : MonoBehaviour
     {
         MyInput();
         
+        Vector3 ray = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+        
+        if(Physics.Raycast(ray, Camera.main.transform.forward, out hit))
+            if (hit.collider != null)
+            {
+                Vector3 _direction = hit.point - transform.position;
+                Quaternion _lookRotation = Quaternion.LookRotation(_direction);
+
+                transform.rotation =
+                    Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 5);
+            }
+
         //Set ammo display if it exists
         if (ammoDisplay != null)
             ammoDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magSize / bulletsPerTap);

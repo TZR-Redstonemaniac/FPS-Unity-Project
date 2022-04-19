@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using EZCameraShake;
+using Random = UnityEngine.Random;
 
 public class BulletPhysics : MonoBehaviour
 {
@@ -20,7 +21,10 @@ public class BulletPhysics : MonoBehaviour
     [SerializeField] private bool useGravity;
 
     [Header("Damage")] 
-    [SerializeField] private int damage;
+    [SerializeField] private int minimunDamage;
+    [SerializeField] private int maximumDamage;
+    [Range(0, 100)] [SerializeField] private int critChance;
+    [SerializeField] private float critMult;
     
     [Header("Explosion")]
     [SerializeField] private int explosionDamage;
@@ -129,7 +133,7 @@ public class BulletPhysics : MonoBehaviour
         if (other.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             if(other.collider.gameObject.GetComponent<BodyPart>() != null)
-                other.collider.gameObject.GetComponent<BodyPart>().TakeDamage(damage);
+                other.collider.gameObject.GetComponent<BodyPart>().TakeDamage(DamageCalculating());
         }
         
         //Create particle effect on collision
@@ -151,6 +155,15 @@ public class BulletPhysics : MonoBehaviour
                 Instantiate(woodImpact, transform.position, transform.rotation);
                 break;
         }
+    }
+
+    int DamageCalculating()
+    {
+        int damage = Random.Range(minimunDamage, maximumDamage);
+        if (Random.value < (critChance / 100))
+            damage = (int) (damage * critMult);
+
+        return damage;
     }
 
     private void Setup()

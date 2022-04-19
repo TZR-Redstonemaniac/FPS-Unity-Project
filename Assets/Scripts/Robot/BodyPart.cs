@@ -8,6 +8,7 @@ public class BodyPart : MonoBehaviour
     ////////////////////////////////////////Public Variables////////////////////////////////////////
 
     [SerializeField] private RobotLife life;
+    [SerializeField] private float damageMultiplier;
 
     ////////////////////////////////////////Private Variables////////////////////////////////////////
 
@@ -15,6 +16,6 @@ public class BodyPart : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        life.TakeDamage(damage);
+        life.TakeDamage(damage * damageMultiplier);
     }
 }
