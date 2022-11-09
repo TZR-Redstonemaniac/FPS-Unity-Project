@@ -12,20 +12,29 @@ public class MinimapFollow : MonoBehaviour
     [SerializeField] private float height;
     [SerializeField] private float yOffset;
     [SerializeField] private Transform followObject;
-    
+
     ////////////////////////////////////////Private Variables////////////////////////////////////////
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if(followObject == null)
-            Destroy(gameObject);
-    }
+    private bool exists = true;
 
     void LateUpdate()
     {
-        transform.position = new Vector3(followObject.position.x, height, followObject.position.z);
-        transform.rotation =
-            Quaternion.Euler(transform.eulerAngles.x, followObject.eulerAngles.y + yOffset, transform.eulerAngles.z);
+        while (exists)
+        {
+            if (followObject is null)
+            {
+                Destroy(gameObject);
+                exists = false;
+                break;
+            }
+            else
+            {
+                transform.position = new Vector3(followObject.position.x, height, followObject.position.z);
+                transform.rotation =
+                    Quaternion.Euler(transform.eulerAngles.x, 
+                        followObject.eulerAngles.y + yOffset, transform.eulerAngles.z);
+            }
+        }
+        
     }
 }
